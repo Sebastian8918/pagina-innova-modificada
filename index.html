@@ -68,6 +68,11 @@ input,select,textarea{font-family:var(--fb)}
 .hero-subtitle{font-size:clamp(1rem,2vw,1.25rem);color:rgba(253,250,247,.75);max-width:650px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300;animation:fadeInUp .8s ease .4s both}
 .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp .8s ease .6s both}
 .hero-stats{position:absolute;bottom:3rem;left:0;right:0;display:flex;justify-content:center;gap:4rem;animation:fadeInUp .8s ease .8s both;z-index:2}
+@media(max-width:600px){
+  .hero{height:auto;min-height:100vh;padding-bottom:3rem;flex-direction:column;justify-content:center;align-items:center;padding-top:70px}
+  .hero-content{padding-top:2.5rem;padding-bottom:0}
+  .hero-stats{position:static;margin-top:2rem;gap:1.5rem;flex-wrap:wrap;padding:0 1rem;justify-content:center;width:100%}
+}
 .hero-stat{text-align:center}
 .hero-stat-num{font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--gold)}
 .hero-stat-label{font-size:.75rem;color:rgba(253,250,247,.6);text-transform:uppercase;letter-spacing:.1em}
@@ -481,7 +486,6 @@ input,select,textarea{font-family:var(--fb)}
 /* ============================================================ RESPONSIVE */
 @media(max-width:768px){
   .nav-links{display:none}
-  .hero-stats{gap:2rem}
   .benefits-grid{grid-template-columns:1fr}
   .metrics-grid{grid-template-columns:repeat(2,1fr)}
   .testimonials-grid{grid-template-columns:1fr}
@@ -499,7 +503,6 @@ input,select,textarea{font-family:var(--fb)}
 }
 @media(max-width:480px){
   .parcelas-grid{grid-template-columns:1fr;padding:1.5rem}
-  .hero-stats{flex-direction:column;gap:1rem}
   .metrics-grid{grid-template-columns:1fr 1fr}
   .kpi-grid{grid-template-columns:1fr 1fr}
 }
@@ -568,13 +571,11 @@ input,select,textarea{font-family:var(--fb)}
     <li><a onclick="scrollToSection('productores')">Productores</a></li>
     <li><a onclick="scrollToSection('contacto')">Contacto</a></li>
     <li><a class="nav-cta" onclick="showPage('productor')">Unirse →</a></li>
-    <li>
-      <div class="nav-perfil-btn" onclick="showPage('perfil')">
-        <div class="nav-perfil-avatar">👤</div>
-        Mi Perfil
-      </div>
-    </li>
   </ul>
+  <div class="nav-perfil-btn" onclick="showPage('perfil')">
+    <div class="nav-perfil-avatar">👤</div>
+    Mi Perfil
+  </div>
 </nav>
 
 <!-- ============================================================ HOME PAGE -->
