@@ -1685,28 +1685,59 @@ function renderDetalle(id) {
             <div class="progress-bar" style="height:10px"><div class="progress-fill" style="width:${p.financiado}%"></div></div>
             <div style="font-size:.78rem;color:var(--tl);margin-top:6px">${Math.round(p.loteKg*p.financiado/100)} / ${p.loteKg} kg reservados</div>
           </div>
-          <div style="margin:1.5rem 0 .5rem">
-            <label style="font-size:.85rem;font-weight:600;color:var(--tm);display:block;margin-bottom:8px">
-              Cantidad de kg: <strong style="color:var(--gd)" id="kg-display-${p.id}">10 kg</strong>
-            </label>
-            <input type="range" class="investment-slider" min="5" max="${Math.min(p.loteKg,200)}" value="10"
-              oninput="updateInvestment('${p.id}',${precioNum},this.value)"/>
-            <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--tl)"><span>5 kg</span><span>${Math.min(p.loteKg,200)} kg</span></div>
+          ${(() => {
+            const kgMin = 5;
+            const kgReservados = Math.round(p.loteKg * p.financiado / 100);
+            const kgDisponibles = p.loteKg - kgReservados;
+            const kgMax = Math.max(kgMin, kgDisponibles);
+            const initKg = kgMin;
+            return `
+          <div style="background:rgba(201,169,110,.12);border:1px solid rgba(201,169,110,.35);border-radius:8px;padding:9px 13px;font-size:.8rem;color:var(--bm);margin:1.2rem 0 .25rem;display:flex;align-items:center;gap:7px">
+            <span style="font-size:1rem">📦</span>
+            <span>Compra mínima: <strong>${kgMin} kg</strong> · Disponibles: <strong>${kgDisponibles} kg</strong></span>
           </div>
+          <div style="margin:.75rem 0 .5rem">
+            <label style="font-size:.85rem;font-weight:600;color:var(--tm);display:block;margin-bottom:8px">
+              Cantidad de kg: <strong style="color:var(--gd)" id="kg-display-${p.id}">${initKg} kg</strong>
+            </label>
+            <input type="range" class="investment-slider" min="${kgMin}" max="${kgMax}" value="${initKg}"
+              oninput="updateInvestment('${p.id}',${precioNum},this.value)"/>
+            <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--tl)">
+              <span>${kgMin} kg <span style="color:var(--tl);font-style:italic">(mín.)</span></span>
+              <span>${kgMax} kg <span style="color:var(--tl);font-style:italic">(disponible)</span></span>
+            </div>
+          </div>`;
+          })()}
           <div class="investment-summary" id="inv-summary-${p.id}">
             <div class="inv-row"><span class="inv-label">Precio por kg</span><span class="inv-val">${p.precio}</span></div>
-            <div class="inv-row"><span class="inv-label">Cantidad</span><span class="inv-val" id="inv-kg-${p.id}">10 kg</span></div>
+            <div class="inv-row"><span class="inv-label">Cantidad</span><span class="inv-val" id="inv-kg-${p.id}">5 kg</span></div>
             <div class="inv-row" style="border-top:1px solid var(--beige-d);padding-top:8px;margin-top:4px">
               <span class="inv-label" style="font-weight:600">Total estimado</span>
-              <span class="inv-val gold" style="font-size:1rem" id="inv-total-${p.id}">S/ ${(10*precioNum).toLocaleString()}</span>
+              <span class="inv-val gold" style="font-size:1rem" id="inv-total-${p.id}">S/ ${(5*precioNum).toLocaleString()}</span>
             </div>
           </div>
           <div style="background:rgba(61,107,61,.08);border:1px solid rgba(61,107,61,.2);border-radius:8px;padding:10px 12px;font-size:.8rem;color:var(--gd);margin-bottom:.5rem">
             ✓ Pago al confirmar envío · Sin comisiones ocultas
           </div>
           <button class="btn-reservar" id="btn-reservar-${p.id}" onclick="doReserva('${p.id}',${precioNum})">
-            Reservar 10 kg — S/ ${(10*precioNum).toLocaleString()}
+            Reservar 5 kg — S/ ${(5*precioNum).toLocaleString()}
           </button>
+        </div>
+
+        <!-- CONTACTO WHATSAPP -->
+        <div class="sidebar-card" style="border:1.5px solid #25D366;background:linear-gradient(135deg,rgba(37,211,102,.06) 0%,rgba(37,211,102,.02) 100%);padding:1.4rem 1.6rem">
+          <div style="font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#128C7E;margin-bottom:.65rem">Más información</div>
+          <p style="font-size:.85rem;color:var(--tm);line-height:1.5;margin-bottom:1rem">¿Tienes dudas sobre este lote? Contáctanos directamente por WhatsApp.</p>
+          <a href="https://wa.me/51976123456" target="_blank" rel="noopener"
+            style="display:flex;align-items:center;gap:12px;background:#25D366;color:white;border-radius:10px;padding:12px 16px;text-decoration:none;font-weight:700;font-size:.95rem;transition:all .2s;box-shadow:0 4px 14px rgba(37,211,102,.35)"
+            onmouseover="this.style.background='#1ebe5d';this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.background='#25D366';this.style.transform='translateY(0)'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="26" height="26">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12.05 2C6.495 2 2 6.493 2 12.047c0 1.853.486 3.619 1.332 5.148L2 22l4.932-1.295A10.02 10.02 0 0012.05 22C17.605 22 22 17.507 22 11.953 22 6.398 17.605 2 12.05 2zm0 18.316a8.274 8.274 0 01-4.223-1.157l-.303-.18-3.134.822.838-3.048-.196-.313A8.266 8.266 0 013.716 12.05c0-4.602 3.746-8.348 8.334-8.348 4.587 0 8.333 3.746 8.333 8.348 0 4.601-3.746 8.266-8.333 8.266z"/>
+            </svg>
+            +51 976 123 456
+          </a>
         </div>
 
       </div>
@@ -1725,6 +1756,8 @@ function updateInvestment(id, precio, kg) {
   if(t) t.textContent = 'S/ '+total.toLocaleString();
   if(b) b.textContent = `Reservar ${kg} kg — S/ ${total.toLocaleString()}`;
 }
+
+
 
 function doReserva(id, precio) {
   const slider = document.querySelector(`#reserva-card-${id} input[type=range]`);
@@ -1925,6 +1958,69 @@ function submitModal() {
   document.getElementById('modal-form-content').style.display='none';
   document.getElementById('modal-success').style.display='block';
   document.getElementById('modal-success-name').textContent = `¡Bienvenido${nombre?' '+nombre.split(' ')[0]:''}!`;
+}
+
+// ============================================================
+// UPLOAD DE ARCHIVOS
+// ============================================================
+let uploadedFiles = [];
+
+function uploadDragOver(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.add('drag-over');
+}
+function uploadDragLeave(e) {
+  document.getElementById('upload-zone').classList.remove('drag-over');
+}
+function uploadDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('drag-over');
+  uploadFilesSelected(e.dataTransfer.files);
+}
+function uploadFilesSelected(files) {
+  const MAX_MB = 10;
+  const allowed = ['application/pdf','image/jpeg','image/png','image/webp'];
+  const errorEl = document.getElementById('upload-error');
+  if(errorEl) errorEl.remove();
+  Array.from(files).forEach(file => {
+    if(!allowed.includes(file.type)) {
+      showUploadError(`"${file.name}" no es un formato permitido.`); return;
+    }
+    if(file.size > MAX_MB * 1024 * 1024) {
+      showUploadError(`"${file.name}" supera los ${MAX_MB} MB.`); return;
+    }
+    if(uploadedFiles.find(f => f.name === file.name && f.size === file.size)) return;
+    uploadedFiles.push(file);
+  });
+  renderUploadList();
+}
+function showUploadError(msg) {
+  let err = document.createElement('p');
+  err.id = 'upload-error';
+  err.className = 'upload-error';
+  err.textContent = msg;
+  document.getElementById('upload-zone').after(err);
+}
+function removeUploadFile(idx) {
+  uploadedFiles.splice(idx, 1);
+  renderUploadList();
+}
+function renderUploadList() {
+  const list = document.getElementById('upload-list');
+  if(!list) return;
+  list.innerHTML = uploadedFiles.map((f, i) => {
+    const ext = f.name.split('.').pop().toLowerCase();
+    const icon = ext === 'pdf' ? '📄' : '🖼️';
+    const kb = f.size < 1024*1024
+      ? (f.size/1024).toFixed(0) + ' KB'
+      : (f.size/1024/1024).toFixed(1) + ' MB';
+    return `<div class="upload-file-item">
+      <span class="upload-file-icon">${icon}</span>
+      <span class="upload-file-name">${f.name}</span>
+      <span class="upload-file-size">${kb}</span>
+      <button class="upload-file-remove" onclick="removeUploadFile(${i})" title="Eliminar">✕</button>
+    </div>`;
+  }).join('');
 }
 
 // ============================================================
