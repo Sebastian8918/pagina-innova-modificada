@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AgroLink Jaén — Café de Especialidad desde el Origen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================ RESET + VARS */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gd:#1a2e1a;--gm:#2d4a2d;--gl:#3d6b3d;
+  --bd:#3b2016;--bm:#6b3a22;--bl:#a0622a;
+  --beige:#f5efe6;--beige-d:#e8ddd0;
+  --gold:#c9a96e;--gold-l:#e8c98a;
+  --white:#fdfaf7;--td:#1a1a1a;--tm:#4a3728;--tl:#8a7060;
+  --fd:'Playfair Display',serif;--fb:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--white);color:var(--td);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--beige)}::-webkit-scrollbar-thumb{background:var(--bl);border-radius:3px}
+button{font-family:var(--fb)}
+input,select,textarea{font-family:var(--fb)}
+
+/* ============================================================ NAVBAR */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:0 2rem;height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(26,46,26,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(201,169,110,0.2);transition:all .3s ease;
+}
+.navbar.scrolled{background:rgba(26,46,26,0.98);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none}
+.nav-logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--bl));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.nav-logo-text{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--white);letter-spacing:.02em}
+.nav-logo-text span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+.nav-links a{color:rgba(253,250,247,.8);text-decoration:none;font-size:.875rem;font-weight:500;letter-spacing:.03em;transition:color .2s;cursor:pointer;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--bl));color:var(--white)!important;padding:8px 18px;border-radius:6px;font-weight:600!important}
+.nav-cta::after{display:none!important}
+.nav-perfil-btn{display:flex;align-items:center;gap:7px;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.3);border-radius:100px;padding:6px 16px 6px 8px;color:var(--gold-l);font-weight:600;font-size:.875rem;cursor:pointer}
+.nav-perfil-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bl));display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+
+/* ============================================================ PAGE SYSTEM */
+.page{display:none;padding-top:70px;min-height:100vh}
+.page.active{display:block}
+#page-home{padding-top:0}
+
+/* ============================================================ HERO */
+.hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0d1f0d 0%,#1a3a1a 30%,#2d1a0a 70%,#1a0d00 100%)}
+.hero-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(ellipse at 20% 50%,rgba(61,107,61,.3) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(107,58,34,.3) 0%,transparent 50%),radial-gradient(ellipse at 60% 80%,rgba(201,169,110,.15) 0%,transparent 40%)}
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.particle{position:absolute;border-radius:50%;background:rgba(201,169,110,.3);animation:float-particle linear infinite}
+@keyframes float-particle{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100px) rotate(720deg);opacity:0}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,31,13,.4) 0%,rgba(13,31,13,.2) 50%,rgba(13,31,13,.7) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px;padding:0 2rem}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.4);border-radius:100px;padding:6px 18px;margin-bottom:2rem;font-size:.8rem;font-weight:500;letter-spacing:.1em;color:var(--gold-l);text-transform:uppercase;animation:fadeInDown .8s ease}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block}
+.hero-title{font-family:var(--fd);font-size:clamp(2.5rem,6vw,5rem);font-weight:900;line-height:1.1;color:var(--white);margin-bottom:1.5rem;animation:fadeInUp .8s ease .2s both}
+.hero-title .accent{color:var(--gold);font-style:italic}
+.hero-subtitle{font-size:clamp(1rem,2vw,1.25rem);color:rgba(253,250,247,.75);max-width:650px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300;animation:fadeInUp .8s ease .4s both}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp .8s ease .6s both}
+.hero-stats{position:absolute;bottom:3rem;left:0;right:0;display:flex;justify-content:center;gap:4rem;animation:fadeInUp .8s ease .8s both;z-index:2}
+.hero-stat{text-align:center}
+.hero-stat-num{font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--gold)}
+.hero-stat-label{font-size:.75rem;color:rgba(253,250,247,.6);text-transform:uppercase;letter-spacing:.1em}
+
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* ============================================================ BUTTONS */
+.btn-primary{background:linear-gradient(135deg,var(--gold) 0%,var(--bl) 100%);color:var(--white);border:none;padding:14px 32px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;letter-spacing:.02em;transition:all .3s ease;box-shadow:0 4px 20px rgba(201,169,110,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,169,110,.4)}
+.btn-secondary{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);color:var(--white);border:1px solid rgba(255,255,255,.25);padding:14px 32px;border-radius:8px;font-size:.95rem;font-weight:500;cursor:pointer;letter-spacing:.02em;transition:all .3s ease}
+.btn-secondary:hover{background:rgba(255,255,255,.15);transform:translateY(-2px)}
+.btn-outline-sm{background:white;border:1px solid var(--beige-d);padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:500;cursor:pointer;color:var(--tm);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-outline-sm:hover{border-color:var(--gd);color:var(--gd)}
+.btn-filled-sm{background:var(--gd);border:none;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;color:white;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-filled-sm:hover{background:var(--gm)}
+
+/* ============================================================ SECTIONS */
+.section{padding:100px 2rem}
+.section-dark{background:var(--gd);color:var(--white)}
+.section-beige{background:var(--beige)}
+.section-brown{background:var(--bd);color:var(--white)}
+.container{max-width:1200px;margin:0 auto}
+.section-label{font-size:.75rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.2;margin-bottom:1.5rem}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-subtitle{font-size:1.05rem;line-height:1.7;color:var(--tl);max-width:600px}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-header .section-subtitle{margin:0 auto}
+
+/* ============================================================ FEATURE CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.feature-card{background:rgba(255,255,255,.05);border:1px solid rgba(201,169,110,.2);border-radius:16px;padding:2.5rem;position:relative;overflow:hidden;transition:all .3s ease}
+.feature-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,169,110,.05) 0%,transparent 70%);opacity:0;transition:opacity .3s}
+.feature-card:hover{transform:translateY(-4px);border-color:rgba(201,169,110,.4)}
+.feature-card:hover::before{opacity:1}
+.card-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--bl));display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.5rem}
+.card-title{font-family:var(--fd);font-size:1.3rem;font-weight:600;color:var(--white);margin-bottom:.75rem}
+.card-text{color:rgba(253,250,247,.65);line-height:1.7}
+
+/* ============================================================ TIMELINE */
+.timeline{position:relative;max-width:800px;margin:0 auto}
+.timeline::before{content:'';position:absolute;left:40px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),transparent)}
+.timeline-item{display:flex;gap:2rem;margin-bottom:3rem;opacity:0;transform:translateX(-20px);transition:all .5s ease}
+.timeline-item.visible{opacity:1;transform:translateX(0)}
+.timeline-dot{flex-shrink:0;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gm),var(--gl));border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.4rem;position:relative;z-index:1}
+.timeline-num{position:absolute;top:-4px;right:-4px;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--bd);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--fm)}
+.timeline-content{padding-top:1.2rem}
+.timeline-title{font-family:var(--fd);font-size:1.2rem;font-weight:600;color:var(--td);margin-bottom:.5rem}
+.timeline-text{color:var(--tl);line-height:1.7}
+
+/* ============================================================ BENEFITS */
+.benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.benefit-col{background:white;border-radius:20px;padding:2.5rem;box-shadow:0 4px 30px rgba(0,0,0,.08);border-top:4px solid}
+.benefit-col.producers{border-color:var(--gl)}
+.benefit-col.buyers{border-color:var(--gold)}
+.benefit-col-title{font-family:var(--fd);font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:12px}
+.benefit-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--beige-d)}
+.benefit-item:last-child{border-bottom:none}
+.benefit-check{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;margin-top:2px}
+.producers .benefit-check{background:rgba(61,107,61,.15);color:var(--gl)}
+.buyers .benefit-check{background:rgba(201,169,110,.15);color:var(--bl)}
+.benefit-text{color:var(--tm);line-height:1.5}
+
+/* ============================================================ METRICS */
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.metric-card{text-align:center;padding:2.5rem 1.5rem;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.2);border-radius:16px;position:relative;overflow:hidden}
+.metric-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--bl))}
+.metric-num{font-family:var(--fd);font-size:3rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:.5rem}
+.metric-label{color:rgba(253,250,247,.7);font-size:.9rem}
+
+/* ============================================================ TESTIMONIALS */
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.testimonial-card{background:white;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(0,0,0,.08);border:1px solid var(--beige-d);transition:transform .3s ease,box-shadow .3s ease}
+.testimonial-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.12)}
+.testimonial-quote{font-family:var(--fd);font-size:3rem;color:var(--gold);line-height:.5;margin-bottom:1rem}
+.testimonial-text{color:var(--tm);line-height:1.7;font-style:italic;margin-bottom:1.5rem}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.testimonial-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gm),var(--gl));display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.testimonial-name{font-weight:600;color:var(--td);font-size:.9rem}
+.testimonial-role{font-size:.78rem;color:var(--tl)}
+.stars{color:var(--gold);font-size:.8rem;margin-bottom:.5rem}
+
+/* ============================================================ CTA */
+.cta-section{background:linear-gradient(135deg,var(--gd) 0%,var(--bd) 100%);padding:100px 2rem;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,169,110,.15) 0%,transparent 70%)}
+.cta-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);font-weight:700;color:var(--white);margin-bottom:1rem;position:relative}
+.cta-sub{color:rgba(253,250,247,.7);margin-bottom:2.5rem;font-size:1.1rem;position:relative}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+
+/* ============================================================ MARKETPLACE */
+.marketplace-hero{background:linear-gradient(135deg,var(--gd),var(--bd));padding:120px 2rem 60px;text-align:center}
+.search-bar{display:flex;max-width:600px;margin:2rem auto 0;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:12px;overflow:hidden}
+.search-input{flex:1;background:none;border:none;outline:none;padding:16px 20px;color:var(--white);font-size:.95rem;font-family:var(--fb)}
+.search-input::placeholder{color:rgba(255,255,255,.4)}
+.search-btn{background:var(--gold);border:none;padding:16px 24px;color:var(--bd);font-weight:600;cursor:pointer;font-family:var(--fb);transition:background .2s}
+.search-btn:hover{background:var(--gold-l)}
+.filters{display:flex;gap:1rem;flex-wrap:wrap;padding:2rem;max-width:1200px;margin:0 auto;border-bottom:1px solid var(--beige-d);align-items:center}
+.filter-chip{padding:8px 18px;border-radius:100px;border:1px solid var(--beige-d);background:white;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--tm);transition:all .2s;font-family:var(--fb)}
+.filter-chip:hover,.filter-chip.active{background:var(--gd);color:var(--white);border-color:var(--gd)}
+.filter-count{margin-left:auto;color:var(--tl);font-size:.85rem}
+.parcelas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:2rem;padding:3rem 2rem;max-width:1200px;margin:0 auto}
+.parcela-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);border:1px solid var(--beige-d);transition:all .3s ease;cursor:pointer}
+.parcela-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(0,0,0,.15)}
+.parcela-img{height:220px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:5rem;transition:transform .4s ease}
+.parcela-card:hover .parcela-img{transform:scale(1.03)}
+.parcela-badge{position:absolute;top:12px;left:12px;background:rgba(26,46,26,.85);backdrop-filter:blur(8px);color:var(--gold);font-size:.72rem;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.08em;text-transform:uppercase}
+.parcela-progress-pill{position:absolute;bottom:12px;right:12px;background:rgba(26,46,26,.85);backdrop-filter:blur(8px);color:white;font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:100px}
+.parcela-body{padding:1.5rem}
+.parcela-producer{font-size:.78rem;color:var(--tl);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.parcela-name{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--td);margin-bottom:.75rem}
+.parcela-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.meta-tag{font-size:.75rem;padding:3px 10px;background:var(--beige);border-radius:100px;color:var(--tm)}
+.progress-section{margin-bottom:1.25rem}
+.progress-header{display:flex;justify-content:space-between;margin-bottom:6px}
+.progress-label{font-size:.78rem;color:var(--tl)}
+.progress-pct{font-size:.78rem;font-weight:600;color:var(--gl)}
+.progress-bar{height:6px;background:var(--beige-d);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gl),var(--gold));transition:width 1s ease}
+.parcela-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--beige-d)}
+.parcela-price{font-size:.85rem;color:var(--tl)}
+.parcela-price strong{color:var(--bd);font-size:1rem}
+.btn-trazabilidad{background:var(--gd);color:var(--white);border:none;padding:8px 18px;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--fb)}
+.btn-trazabilidad:hover{background:var(--gl);transform:translateY(-1px)}
+.no-results{text-align:center;padding:4rem 2rem;color:var(--tl)}
+.no-results-icon{font-size:3rem;margin-bottom:1rem}
+
+/* ============================================================ DETALLE */
+.detalle-hero{height:70vh;min-height:500px;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.detalle-hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10rem}
+.detalle-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,13,.95) 0%,rgba(13,31,13,.4) 60%,transparent 100%)}
+.detalle-hero-content{position:relative;z-index:2;padding:3rem;max-width:1200px;width:100%;margin:0 auto}
+.detalle-tag{display:inline-block;background:rgba(201,169,110,.2);border:1px solid rgba(201,169,110,.4);color:var(--gold);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:100px;margin-bottom:1rem}
+.detalle-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);font-weight:700;color:var(--white);margin-bottom:.75rem}
+.detalle-meta-row{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.detalle-meta-item{display:flex;align-items:center;gap:8px;color:rgba(253,250,247,.8);font-size:.9rem}
+.detalle-body{max-width:1200px;margin:0 auto;padding:3rem 2rem;display:grid;grid-template-columns:1fr 380px;gap:3rem}
+.btn-back{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:white;padding:6px 16px;border-radius:6px;cursor:pointer;margin-bottom:1rem;font-size:.85rem;font-family:var(--fb);transition:all .2s}
+.btn-back:hover{background:rgba(255,255,255,.2)}
+
+/* Trazabilidad */
+.traz-section{margin-bottom:3rem}
+.traz-title{font-family:var(--fd);font-size:1.5rem;font-weight:700;margin-bottom:2rem;display:flex;align-items:center;gap:12px}
+.traz-timeline{position:relative}
+.traz-timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gl),var(--beige-d))}
+.traz-item{display:flex;gap:1.5rem;margin-bottom:2rem}
+.traz-dot{flex-shrink:0;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;position:relative;z-index:1}
+.traz-dot.done{background:linear-gradient(135deg,var(--gl),var(--gm));border:2px solid var(--gl)}
+.traz-dot.progress{background:linear-gradient(135deg,var(--gold),var(--bl));border:2px solid var(--gold)}
+.traz-dot.pending{background:var(--beige-d);border:2px dashed var(--beige-d)}
+.traz-content{flex:1;padding-top:.5rem}
+.traz-step-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem}
+.traz-step-name{font-weight:600;color:var(--td)}
+.traz-step-date{font-size:.78rem;color:var(--tl);font-family:var(--fm)}
+.traz-step-text{color:var(--tm);font-size:.88rem;line-height:1.6;margin-bottom:.75rem}
+.traz-step-badge{display:inline-block;font-size:.72rem;font-weight:600;padding:2px 10px;border-radius:100px;letter-spacing:.05em;text-transform:uppercase}
+.badge-done{background:rgba(61,107,61,.15);color:var(--gl)}
+.badge-progress{background:rgba(201,169,110,.15);color:var(--bl)}
+.badge-pending{background:var(--beige-d);color:var(--tl)}
+.traz-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+.traz-metric{background:var(--beige);border-radius:10px;padding:12px;text-align:center}
+.traz-metric-val{font-family:var(--fm);font-size:1.1rem;font-weight:600;color:var(--gd)}
+.traz-metric-key{font-size:.72rem;color:var(--tl);text-transform:uppercase;letter-spacing:.05em}
+
+/* Sidebar */
+.sidebar-card{background:white;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(0,0,0,.08);border:1px solid var(--beige-d);margin-bottom:2rem}
+.sidebar-card-title{font-family:var(--fd);font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--td)}
+.investment-slider{width:100%;margin:1rem 0;accent-color:var(--gd)}
+.investment-summary{background:var(--beige);border-radius:10px;padding:1rem;margin:1rem 0}
+.inv-row{display:flex;justify-content:space-between;padding:4px 0}
+.inv-label{color:var(--tl);font-size:.85rem}
+.inv-val{font-weight:600;color:var(--td);font-size:.85rem}
+.inv-val.gold{color:var(--bl)}
+.btn-reservar{width:100%;background:linear-gradient(135deg,var(--gd),var(--gm));color:white;border:none;padding:16px;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;margin-top:1rem;letter-spacing:.02em;font-family:var(--fb)}
+.btn-reservar:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(26,46,26,.4)}
+.financing-bar{margin-top:1.5rem}
+.financing-label{display:flex;justify-content:space-between;margin-bottom:8px}
+.financing-pct{font-size:1.5rem;font-weight:700;color:var(--gd);font-family:var(--fd)}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-bottom:2rem}
+.info-item{background:var(--beige);border-radius:12px;padding:1.25rem}
+.info-item-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tl);margin-bottom:4px}
+.info-item-val{font-weight:600;color:var(--td)}
+.flavor-tags,.cert-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+.flavor-tag{background:var(--gd);color:var(--gold);font-size:.78rem;padding:4px 12px;border-radius:100px;font-weight:500}
+.cert-tag{background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.4);color:var(--bm);font-size:.78rem;padding:4px 12px;border-radius:100px}
+.success-box{text-align:center;padding:2rem}
+.success-icon{font-size:3rem;margin-bottom:1rem}
+.success-title{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--gd);margin-bottom:.5rem}
+.success-text{color:var(--tl)}
+
+/* ============================================================ REGISTRO */
+.registro-page{min-height:100vh;background:linear-gradient(135deg,var(--gd),var(--bd));padding:50px 2rem 80px;display:flex;align-items:center;justify-content:center}
+.registro-box{max-width:680px;width:100%}
+.registro-card{background:white;border-radius:20px;padding:2.5rem;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.form-field{margin-bottom:1.25rem}
+.form-label{display:block;font-size:.85rem;font-weight:600;color:var(--tm);margin-bottom:6px}
+.form-input,.form-select,.form-textarea{width:100%;border:1px solid var(--beige-d);border-radius:8px;padding:12px 14px;font-size:.95rem;color:var(--td);background:var(--beige);font-family:var(--fb);transition:border-color .2s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gl);background:white}
+.form-textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* ============================================================ MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:9000;background:rgba(13,31,13,.75);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:2rem}
+.modal-overlay.open{display:flex}
+.modal{background:white;border-radius:20px;padding:2.5rem;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.4);animation:modalIn .3s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem}
+.modal-title{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--td)}
+.modal-close{background:var(--beige);border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;color:var(--tm);transition:background .2s}
+.modal-close:hover{background:var(--beige-d)}
+
+/* ============================================================ FOOTER */
+.footer{background:var(--gd);padding:4rem 2rem 2rem;color:rgba(253,250,247,.7)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto 3rem}
+.footer-brand-name{font-family:var(--fd);font-size:1.3rem;color:var(--white);margin-bottom:1rem;font-weight:700}
+.footer-brand-name span{color:var(--gold)}
+.footer-desc{font-size:.88rem;line-height:1.7;margin-bottom:1.5rem}
+.footer-socials{display:flex;gap:.75rem}
+.social-btn{width:38px;height:38px;border-radius:8px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(253,250,247,.7);font-size:.9rem;cursor:pointer;transition:all .2s;border:1px solid rgba(255,255,255,.1)}
+.social-btn:hover{background:var(--gold);color:var(--bd)}
+.footer-col-title{font-weight:600;color:var(--white);margin-bottom:1.25rem;font-size:.9rem;letter-spacing:.05em}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-links a{color:rgba(253,250,247,.6);text-decoration:none;font-size:.88rem;transition:color .2s;cursor:pointer}
+.footer-links a:hover{color:var(--gold)}
+.footer-contact-item{display:flex;align-items:center;gap:10px;margin-bottom:.75rem;font-size:.88rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;font-size:.82rem;flex-wrap:wrap;gap:1rem}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{color:rgba(253,250,247,.5);text-decoration:none;cursor:pointer}
+
+/* ============================================================ PERFIL */
+.perfil-layout{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 70px);background:#f0ece6}
+.perfil-sidebar{background:var(--gd);display:flex;flex-direction:column;height:calc(100vh - 70px);position:sticky;top:70px;overflow-y:auto}
+.perfil-avatar-wrap{text-align:center;padding:1.5rem 2rem 2rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1rem}
+.perfil-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bl));display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1rem;border:3px solid rgba(201,169,110,.4);box-shadow:0 0 0 6px rgba(201,169,110,.1);position:relative}
+.perfil-avatar-dot{position:absolute;bottom:0;right:0;width:22px;height:22px;border-radius:50%;background:#4ade80;border:2px solid var(--gd)}
+.perfil-name{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:2px}
+.perfil-email{font-size:.75rem;color:rgba(253,250,247,.5);margin-bottom:.75rem}
+.perfil-role-tag{display:inline-block;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.3);color:var(--gold);font-size:.7rem;font-weight:600;padding:3px 12px;border-radius:100px;letter-spacing:.08em;text-transform:uppercase}
+.perfil-nav{flex:1;padding:0 1rem}
+.perfil-nav-label{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(253,250,247,.3);padding:.75rem 1rem .4rem;margin-bottom:.25rem}
+.perfil-nav-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;cursor:pointer;margin-bottom:2px;color:rgba(253,250,247,.6);font-size:.88rem;font-weight:500;transition:all .2s;position:relative}
+.perfil-nav-item:hover{background:rgba(255,255,255,.06);color:var(--white)}
+.perfil-nav-item.active{background:rgba(201,169,110,.15);color:var(--gold-l);font-weight:600}
+.perfil-nav-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;border-radius:0 2px 2px 0;background:var(--gold)}
+.perfil-nav-badge{margin-left:auto;background:var(--gold);color:var(--bd);font-size:.65rem;font-weight:700;padding:1px 7px;border-radius:100px;min-width:20px;text-align:center}
+.perfil-sidebar-footer{padding:1rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);margin-top:auto}
+.btn-logout{width:100%;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5;padding:10px;border-radius:8px;font-size:.85rem;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:var(--fb)}
+.btn-logout:hover{background:rgba(239,68,68,.2)}
+.perfil-main{padding:2.5rem;overflow-y:auto}
+.perfil-tab{display:none}
+.perfil-tab.active{display:block}
+.perfil-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.perfil-page-title{font-family:var(--fd);font-size:1.75rem;font-weight:700;color:var(--td)}
+.perfil-page-title span{color:var(--gd)}
+.perfil-topbar-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:2rem}
+.kpi-card{background:white;border-radius:14px;padding:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--beige-d);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.kpi-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-card.green::after{background:linear-gradient(90deg,var(--gl),#6dbc6d)}
+.kpi-card.gold::after{background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+.kpi-card.brown::after{background:linear-gradient(90deg,var(--bm),var(--bl))}
+.kpi-card.blue::after{background:linear-gradient(90deg,#6366f1,#818cf8)}
+.kpi-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1rem}
+.kpi-icon.green{background:rgba(61,107,61,.12)}
+.kpi-icon.gold{background:rgba(201,169,110,.15)}
+.kpi-icon.brown{background:rgba(107,58,34,.12)}
+.kpi-icon.blue{background:rgba(99,102,241,.12)}
+.kpi-val{font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--td);line-height:1;margin-bottom:4px}
+.kpi-label{font-size:.8rem;color:var(--tl);margin-bottom:.75rem}
+.kpi-change{font-size:.75rem;font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:100px}
+.kpi-change.up{background:rgba(74,222,128,.12);color:#16a34a}
+.kpi-change.neutral{background:rgba(201,169,110,.12);color:var(--bm)}
+.chart-card{background:white;border-radius:14px;padding:1.75rem;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--beige-d);margin-bottom:1.5rem}
+.chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem}
+.chart-title{font-weight:700;font-size:1rem;color:var(--td)}
+.chart-subtitle{font-size:.8rem;color:var(--tl);margin-top:2px}
+.charts-row{display:grid;grid-template-columns:1fr 340px;gap:1.25rem;margin-bottom:1.5rem}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:160px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{width:100%;border-radius:6px 6px 0 0;min-height:4px;position:relative;cursor:pointer;transition:opacity .2s}
+.bar:hover::after{content:attr(data-val);position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--gd);color:white;font-size:.7rem;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.bar-label{font-size:.68rem;color:var(--tl);text-align:center}
+.portfolio-row{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem}
+.port-item-header{display:flex;justify-content:space-between;margin-bottom:4px}
+.port-label{font-size:.82rem;font-weight:600;color:var(--tm)}
+.port-sub{font-size:.78rem;color:var(--tl)}
+.mis-parcelas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-top:1.5rem}
+.mi-parcela-card{background:white;border-radius:14px;overflow:hidden;border:1px solid var(--beige-d);box-shadow:0 2px 12px rgba(0,0,0,.06);transition:all .25s ease}
+.mi-parcela-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.mi-parcela-img{height:140px;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.5rem}
+.mi-parcela-status{position:absolute;top:10px;right:10px;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:100px;letter-spacing:.05em}
+.status-activa{background:rgba(74,222,128,.2);color:#16a34a;border:1px solid rgba(74,222,128,.3)}
+.status-proceso{background:rgba(201,169,110,.2);color:var(--bm);border:1px solid rgba(201,169,110,.3)}
+.status-pendiente{background:rgba(99,102,241,.15);color:#6366f1;border:1px solid rgba(99,102,241,.3)}
+.mi-parcela-body{padding:1.25rem}
+.mi-parcela-name{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--td);margin-bottom:4px}
+.mi-parcela-producer{font-size:.75rem;color:var(--tl);margin-bottom:.75rem}
+.mi-parcela-stats{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem}
+.mi-stat{background:var(--beige);border-radius:8px;padding:8px 10px}
+.mi-stat-val{font-weight:700;font-size:.9rem;color:var(--td)}
+.mi-stat-key{font-size:.68rem;color:var(--tl);text-transform:uppercase;letter-spacing:.05em}
+.mi-parcela-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid var(--beige-d);margin-top:.75rem}
+.btn-mini{flex:1;min-width:0;padding:7px 10px;border-radius:7px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;white-space:nowrap;font-family:var(--fb)}
+.btn-mini-primary{background:var(--gd);color:white;border:none}
+.btn-mini-primary:hover{background:var(--gm)}
+.btn-mini-outline{background:var(--beige);color:var(--tm);border:1px solid var(--beige-d)}
+.btn-mini-outline:hover{border-color:var(--gd);color:var(--gd)}
+.historial-list{display:flex;flex-direction:column;gap:0}
+.historial-item{display:flex;align-items:flex-start;gap:1.25rem;padding:1.25rem 0;border-bottom:1px solid var(--beige-d)}
+.historial-item:last-child{border-bottom:none}
+.historial-dot{flex-shrink:0;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.h-dot-green{background:rgba(61,107,61,.12)}
+.h-dot-gold{background:rgba(201,169,110,.15)}
+.h-dot-blue{background:rgba(99,102,241,.12)}
+.h-dot-purple{background:rgba(168,85,247,.12)}
+.historial-content{flex:1}
+.historial-title{font-weight:600;font-size:.9rem;color:var(--td);margin-bottom:2px}
+.historial-sub{font-size:.8rem;color:var(--tl);line-height:1.4}
+.historial-right{text-align:right;flex-shrink:0}
+.historial-date{font-size:.75rem;color:var(--tl);font-family:var(--fm)}
+.historial-badge{display:inline-block;margin-top:4px;font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:.05em}
+.perfil-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+.info-field{background:var(--beige);border-radius:10px;padding:1rem 1.25rem}
+.info-field-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tl);margin-bottom:4px}
+.info-field-val{font-weight:600;color:var(--td);font-size:.95rem}
+.info-field input{width:100%;border:1.5px solid var(--gl);border-radius:8px;padding:8px 10px;font-family:var(--fb);font-size:.9rem;outline:none;background:white;color:var(--td)}
+.seguridad-item{display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--beige);border-radius:10px;margin-bottom:.75rem}
+.seg-icon{font-size:1.2rem}
+.seg-info{flex:1}
+.seg-label{font-weight:600;font-size:.88rem}
+.seg-sub{font-size:.78rem;color:var(--tl)}
+.seg-btn{background:white;border:1px solid var(--beige-d);padding:6px 14px;border-radius:7px;font-size:.8rem;cursor:pointer;font-weight:500;color:var(--tm);font-family:var(--fb)}
+.danger-zone{display:flex;gap:1rem;flex-wrap:wrap}
+.danger-card{flex:1;min-width:220px}
+.danger-btn{width:100%;padding:10px;border-radius:8px;margin-bottom:.5rem;font-size:.85rem;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:var(--fb)}
+.quick-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.quick-stat{background:white;border-radius:12px;padding:1.25rem;border:1px solid var(--beige-d);display:flex;align-items:center;gap:14px}
+.quick-stat-icon{width:44px;height:44px;border-radius:10px;background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.quick-stat-val{font-family:var(--fd);font-size:1.3rem;font-weight:700}
+
+/* ============================================================ PRODUCTOR PAGE */
+.productor-hero{background:linear-gradient(135deg,var(--gd) 0%,#0d2a0d 50%,var(--bd) 100%);padding:120px 2rem 80px;text-align:center;position:relative;overflow:hidden}
+.productor-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(61,107,61,.25) 0%,transparent 60%),radial-gradient(ellipse at 70% 20%,rgba(201,169,110,.15) 0%,transparent 50%)}
+.productor-hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto}
+.productor-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,110,.15);border:1px solid rgba(201,169,110,.4);border-radius:100px;padding:6px 18px;margin-bottom:1.5rem;font-size:.8rem;font-weight:500;letter-spacing:.1em;color:var(--gold-l);text-transform:uppercase}
+.productor-hero h1{font-family:var(--fd);font-size:clamp(2.2rem,5vw,4rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:1.25rem}
+.productor-hero h1 em{color:var(--gold);font-style:italic}
+.productor-hero p{color:rgba(253,250,247,.75);font-size:1.1rem;line-height:1.7;max-width:600px;margin:0 auto 2rem;font-weight:300}
+.productor-stats-row{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:3rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.1)}
+.productor-stat{text-align:center}
+.productor-stat-num{font-family:var(--fd);font-size:2.2rem;font-weight:900;color:var(--gold)}
+.productor-stat-label{font-size:.78rem;color:rgba(253,250,247,.6);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+
+.beneficios-productor{padding:80px 2rem;background:var(--beige)}
+.beneficios-productor .container{max-width:1100px;margin:0 auto}
+.beneficios-grid-new{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.beneficio-card{background:white;border-radius:16px;padding:2rem;border:1px solid var(--beige-d);transition:all .3s ease;position:relative;overflow:hidden}
+.beneficio-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gl),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.beneficio-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.1)}
+.beneficio-card:hover::after{transform:scaleX(1)}
+.beneficio-icon{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,rgba(61,107,61,.12),rgba(201,169,110,.12));display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem}
+.beneficio-title{font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--td);margin-bottom:.6rem}
+.beneficio-text{color:var(--tl);font-size:.9rem;line-height:1.6}
+
+.como-unirse{padding:80px 2rem;background:white}
+.como-unirse .container{max-width:900px;margin:0 auto}
+.pasos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;position:relative}
+.pasos-grid::before{content:'';position:absolute;top:30px;left:calc(12.5% + 15px);right:calc(12.5% + 15px);height:2px;background:linear-gradient(90deg,var(--gl),var(--gold));z-index:0}
+.paso-item{text-align:center;position:relative;z-index:1}
+.paso-num{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--gm),var(--gl));border:3px solid white;box-shadow:0 4px 20px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:1.3rem;font-weight:900;color:white;margin:0 auto 1rem}
+.paso-title{font-weight:700;font-size:.9rem;color:var(--td);margin-bottom:.4rem}
+.paso-text{font-size:.8rem;color:var(--tl);line-height:1.5}
+
+.casos-exito{padding:80px 2rem;background:var(--gd)}
+.casos-exito .container{max-width:1100px;margin:0 auto}
+.casos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.caso-card{background:rgba(255,255,255,.06);border:1px solid rgba(201,169,110,.2);border-radius:20px;overflow:hidden;transition:all .3s ease}
+.caso-card:hover{transform:translateY(-5px);border-color:rgba(201,169,110,.5);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.caso-foto{height:180px;display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative}
+.caso-badge{position:absolute;top:12px;right:12px;background:rgba(201,169,110,.2);border:1px solid rgba(201,169,110,.4);color:var(--gold);font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.08em}
+.caso-body{padding:1.5rem}
+.caso-nombre{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:2px}
+.caso-lugar{font-size:.78rem;color:var(--tl);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.05em}
+.caso-quote{font-style:italic;color:rgba(253,250,247,.7);font-size:.88rem;line-height:1.6;margin-bottom:1rem;border-left:2px solid var(--gold);padding-left:12px}
+.caso-stats{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.caso-stat{background:rgba(255,255,255,.05);border-radius:8px;padding:8px 10px;text-align:center}
+.caso-stat-val{font-family:var(--fd);font-weight:700;color:var(--gold);font-size:.95rem}
+.caso-stat-key{font-size:.68rem;color:rgba(253,250,247,.5);text-transform:uppercase;letter-spacing:.05em}
+.stars-white{color:var(--gold);font-size:.8rem;margin-bottom:.5rem}
+
+.registro-productor{padding:80px 2rem;background:var(--beige)}
+.registro-productor .container{max-width:800px;margin:0 auto}
+.registro-productor-card{background:white;border-radius:24px;padding:3rem;box-shadow:0 20px 60px rgba(0,0,0,.1);border:1px solid var(--beige-d)}
+.registro-productor-header{text-align:center;margin-bottom:2.5rem}
+.registro-productor-header .section-label{margin-bottom:.75rem}
+
+@media(max-width:768px){
+  .beneficios-grid-new{grid-template-columns:1fr 1fr}
+  .pasos-grid{grid-template-columns:1fr 1fr}
+  .pasos-grid::before{display:none}
+  .casos-grid{grid-template-columns:1fr}
+  .productor-stats-row{gap:2rem}
+}
+@media(max-width:480px){
+  .beneficios-grid-new{grid-template-columns:1fr}
+  .pasos-grid{grid-template-columns:1fr}
+}
+
+/* ============================================================ RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero-stats{gap:2rem}
+  .benefits-grid{grid-template-columns:1fr}
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .testimonials-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .detalle-body{grid-template-columns:1fr}
+  .info-grid{grid-template-columns:1fr}
+  .traz-metrics{grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr}
+  .perfil-layout{grid-template-columns:1fr}
+  .perfil-sidebar{position:static;height:auto}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .charts-row{grid-template-columns:1fr}
+  .perfil-info-grid{grid-template-columns:1fr}
+  .quick-stats-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .parcelas-grid{grid-template-columns:1fr;padding:1.5rem}
+  .hero-stats{flex-direction:column;gap:1rem}
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ============================================================ FILE UPLOAD ZONE */
+.upload-zone{border:2px dashed var(--beige-d);border-radius:12px;padding:2rem 1.5rem;text-align:center;cursor:pointer;transition:all .25s ease;background:var(--beige);user-select:none;margin-top:4px}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--gl);background:rgba(61,107,61,.06)}
+.upload-zone.drag-over{box-shadow:0 0 0 3px rgba(61,107,61,.15)}
+.upload-icon{font-size:2rem;margin-bottom:.6rem;line-height:1}
+.upload-text{font-size:.9rem;font-weight:600;color:var(--tm);margin-bottom:.3rem}
+.upload-text span{color:var(--gl);text-decoration:underline}
+.upload-formats{font-size:.75rem;color:var(--tl);letter-spacing:.03em}
+.upload-list{display:flex;flex-direction:column;gap:.5rem;margin-top:.75rem}
+.upload-file-item{display:flex;align-items:center;gap:.75rem;background:white;border:1px solid var(--beige-d);border-radius:8px;padding:.6rem .9rem;font-size:.82rem;animation:fadeInUp .2s ease}
+.upload-file-icon{font-size:1.1rem;flex-shrink:0}
+.upload-file-name{flex:1;color:var(--tm);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upload-file-size{color:var(--tl);font-size:.75rem;flex-shrink:0}
+.upload-file-remove{background:none;border:none;cursor:pointer;color:var(--tl);font-size:.95rem;padding:2px 4px;border-radius:4px;transition:color .2s;flex-shrink:0;font-family:var(--fb)}
+.upload-file-remove:hover{color:#dc2626}
+.upload-error{font-size:.78rem;color:#dc2626;margin-top:.4rem}
+
+/* ============================================================ RESERVA CONFIRM MODAL */
+.reserva-modal-overlay{position:fixed;inset:0;z-index:9500;background:rgba(13,31,13,.8);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:2rem}
+.reserva-modal-overlay.open{display:flex}
+.reserva-modal{background:white;border-radius:24px;padding:0;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,.5);animation:modalIn .3s ease}
+.reserva-modal-header{background:linear-gradient(135deg,var(--gd),var(--gm));padding:2rem 2rem 1.5rem;border-radius:24px 24px 0 0;position:relative}
+.reserva-modal-header-title{font-family:var(--fd);font-size:1.35rem;font-weight:700;color:var(--white);margin-bottom:.25rem}
+.reserva-modal-header-sub{font-size:.85rem;color:rgba(253,250,247,.65)}
+.reserva-modal-close{position:absolute;top:1.25rem;right:1.25rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:white;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.reserva-modal-close:hover{background:rgba(255,255,255,.25)}
+.reserva-modal-body{padding:1.75rem 2rem 2rem}
+.reserva-modal-highlight{background:var(--beige);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.reserva-modal-kg{font-family:var(--fd);font-size:2rem;font-weight:900;color:var(--gd)}
+.reserva-modal-kg-label{font-size:.75rem;color:var(--tl);text-transform:uppercase;letter-spacing:.07em}
+.reserva-modal-total{font-family:var(--fd);font-size:2rem;font-weight:900;color:var(--bl);text-align:right}
+.reserva-modal-total-label{font-size:.75rem;color:var(--tl);text-transform:uppercase;letter-spacing:.07em;text-align:right}
+.reserva-modal-divider{height:1px;background:var(--beige-d);margin:.25rem 0 1.25rem}
+.reserva-modal-info-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tl);margin-bottom:.75rem}
+.reserva-modal-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.5rem}
+.reserva-modal-info-item{background:var(--beige);border-radius:10px;padding:.75rem 1rem}
+.reserva-modal-info-label{font-size:.7rem;color:var(--tl);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.reserva-modal-info-val{font-weight:600;font-size:.88rem;color:var(--td)}
+.reserva-modal-note{background:rgba(61,107,61,.08);border:1px solid rgba(61,107,61,.2);border-radius:10px;padding:.85rem 1rem;font-size:.8rem;color:var(--gd);margin-bottom:1.5rem;line-height:1.5}
+.btn-confirmar-reserva{width:100%;background:linear-gradient(135deg,var(--gd),var(--gm));color:white;border:none;padding:16px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;letter-spacing:.02em;font-family:var(--fb);margin-bottom:.75rem}
+.btn-confirmar-reserva:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(26,46,26,.4)}
+.btn-cancelar-reserva{width:100%;background:var(--beige);color:var(--tm);border:1px solid var(--beige-d);padding:12px;border-radius:12px;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--fb)}
+.btn-cancelar-reserva:hover{background:var(--beige-d)}
+
+.bg-farm{background:linear-gradient(160deg,#1a3a12 0%,#2d5a1e 20%,#4a7a35 40%,#6b3a22 60%,#3b2016 80%,#1a2010 100%)}
+.bg-amber{background:linear-gradient(160deg,#3b2a10 0%,#6b4a1a 30%,#a0622a 60%,#c9a96e 100%)}
+.bg-mountain{background:linear-gradient(180deg,#2d4a2d 0%,#1a3a20 30%,#0d2010 70%,#3b2016 100%)}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-icon">☕</div>
+    <div class="nav-logo-text">AgroLink <span>Jaén</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')">Inicio</a></li>
+    <li><a onclick="showPage('parcelas')">Parcelas</a></li>
+    <li><a onclick="scrollToSection('como-funciona')">Cómo funciona</a></li>
+    <li><a onclick="scrollToSection('productores')">Productores</a></li>
+    <li><a onclick="scrollToSection('contacto')">Contacto</a></li>
+    <li><a class="nav-cta" onclick="showPage('productor')">Unirse →</a></li>
+    <li>
+      <div class="nav-perfil-btn" onclick="showPage('perfil')">
+        <div class="nav-perfil-avatar">👤</div>
+        Mi Perfil
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!-- ============================================================ HOME PAGE -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Plataforma de Agrofinanza Digital</div>
+      <h1 class="hero-title">Invierte en <span class="accent">café de especialidad</span> directamente desde el origen</h1>
+      <p class="hero-subtitle">Conecta con productores de Jaén, asegura micro-lotes exclusivos y financia cosechas trazables sin intermediarios.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('parcelas')">Explorar parcelas →</button>
+        <button class="btn-secondary" onclick="showPage('productor')">Convertirme en productor</button>
+        <button class="btn-secondary" onclick="scrollToSection('como-funciona')">Cómo funciona</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num counter" data-target="120" data-suffix="+">0+</div><div class="hero-stat-label">Productores</div></div>
+      <div class="hero-stat"><div class="hero-stat-num counter" data-target="35" data-suffix="+">0+</div><div class="hero-stat-label">Micro-lotes</div></div>
+      <div class="hero-stat"><div class="hero-stat-num counter" data-target="15" data-suffix="+">0+</div><div class="hero-stat-label">Países</div></div>
+      <div class="hero-stat"><div class="hero-stat-num counter" data-target="100" data-suffix="%">0%</div><div class="hero-stat-label">Trazabilidad</div></div>
+    </div>
+  </section>
+
+  <!-- QUÉ ES -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">¿Qué es AgroLink Jaén?</div>
+        <h2 class="section-title" style="color:var(--white)">La plataforma que <em>transforma</em> el café peruano</h2>
+      </div>
+      <div class="cards-grid">
+        <div class="feature-card"><div class="card-icon">💰</div><div class="card-title">Financiamiento anticipado</div><div class="card-text">El agricultor recibe capital antes de la cosecha, sin bancos ni intermediarios. Tú inviertes, él produce café de calidad.</div></div>
+        <div class="feature-card"><div class="card-icon">🔗</div><div class="card-title">Trazabilidad total</div><div class="card-text">Cada lote tiene historia, origen y seguimiento digital en tiempo real. Desde la semilla hasta tu taza.</div></div>
+        <div class="feature-card"><div class="card-icon">🏆</div><div class="card-title">Café exclusivo</div><div class="card-text">Micro-lotes premium directamente desde las alturas de Jaén. Variedades únicas con perfiles de sabor excepcionales.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="section section-beige" id="como-funciona">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Proceso</div>
+        <h2 class="section-title">¿Cómo <em>funciona</em>?</h2>
+        <p class="section-subtitle">Un sistema transparente que beneficia a productores y compradores por igual.</p>
+      </div>
+      <div class="timeline" id="timeline">
+        <div class="timeline-item"><div class="timeline-dot">📝<div class="timeline-num">1</div></div><div class="timeline-content"><div class="timeline-title">El agricultor registra su parcela</div><div class="timeline-text">Completa su perfil con información de la finca, variedad, altitud y superficie.</div></div></div>
+        <div class="timeline-item"><div class="timeline-dot">🔍<div class="timeline-num">2</div></div><div class="timeline-content"><div class="timeline-title">El comprador explora micro-lotes</div><div class="timeline-text">Navega el marketplace filtrando por variedad, proceso, altitud o porcentaje de financiamiento.</div></div></div>
+        <div class="timeline-item"><div class="timeline-dot">💰<div class="timeline-num">3</div></div><div class="timeline-content"><div class="timeline-title">Se realiza la preventa del lote</div><div class="timeline-text">El comprador reserva kilos con pago anticipado, el productor recibe capital para la campaña.</div></div></div>
+        <div class="timeline-item"><div class="timeline-dot">📡<div class="timeline-num">4</div></div><div class="timeline-content"><div class="timeline-title">Se monitorea el cultivo en tiempo real</div><div class="timeline-text">Dashboard de trazabilidad con actualizaciones de cada etapa del proceso productivo.</div></div></div>
+        <div class="timeline-item"><div class="timeline-dot">✈️<div class="timeline-num">5</div></div><div class="timeline-content"><div class="timeline-title">El café es exportado directamente</div><div class="timeline-text">Sin intermediarios. El lote llega al comprador con toda la documentación de origen.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section class="section" id="productores">
+    <div class="container">
+      <div class="section-header"><div class="section-label">Beneficios</div><h2 class="section-title">Una plataforma para <em>todos</em></h2></div>
+      <div class="benefits-grid">
+        <div class="benefit-col producers">
+          <div class="benefit-col-title"><span>🌿</span> Para Productores</div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Financiamiento sin bancos ni intermediarios</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Venta asegurada antes de la cosecha</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Acceso a mercados internacionales</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Mejores precios que el mercado local</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Visibilidad de su historia y finca</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Comunidad de apoyo técnico</div></div>
+        </div>
+        <div class="benefit-col buyers">
+          <div class="benefit-col-title"><span>☕</span> Para Compradores</div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Café de especialidad exclusivo</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Trazabilidad digital en tiempo real</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Conexión directa con el productor</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Calidad premium garantizada</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Impacto social positivo medible</div></div>
+          <div class="benefit-item"><div class="benefit-check">✓</div><div class="benefit-text">Micro-lotes con identidad única</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÉTRICAS -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-header"><div class="section-label">Impacto</div><h2 class="section-title" style="color:var(--white)">Números que <em>hablan</em></h2></div>
+      <div class="metrics-grid">
+        <div class="metric-card"><div class="metric-num counter" data-target="120" data-suffix="+">0+</div><div class="metric-label">Productores activos</div></div>
+        <div class="metric-card"><div class="metric-num counter" data-target="35" data-suffix="+">0+</div><div class="metric-label">Micro-lotes disponibles</div></div>
+        <div class="metric-card"><div class="metric-num counter" data-target="100" data-suffix="%">0%</div><div class="metric-label">Trazabilidad digital</div></div>
+        <div class="metric-card"><div class="metric-num counter" data-target="15" data-suffix="+">0+</div><div class="metric-label">Países compradores</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="section section-beige">
+    <div class="container">
+      <div class="section-header"><div class="section-label">Testimonios</div><h2 class="section-title">Lo que dicen <em>ellos</em></h2></div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card"><div class="stars">★★★★★</div><div class="testimonial-quote">"</div><p class="testimonial-text">Gracias a AgroLink recibí financiamiento anticipado para mi cosecha. Por primera vez pude comprar insumos de calidad sin endeudarse con prestamistas.</p><div class="testimonial-author"><div class="testimonial-avatar">👨‍🌾</div><div><div class="testimonial-name">Gilberto Santamaría</div><div class="testimonial-role">Productor — San Ignacio</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><div class="testimonial-quote">"</div><p class="testimonial-text">La trazabilidad digital es increíble. Puedo saber exactamente cómo fue cultivado mi café. Mis clientes aman conocer la historia detrás de cada taza.</p><div class="testimonial-author"><div class="testimonial-avatar">☕</div><div><div class="testimonial-name">Klaus Müller</div><div class="testimonial-role">Tostador — Berlín, Alemania</div></div></div></div>
+        <div class="testimonial-card"><div class="stars">★★★★★</div><div class="testimonial-quote">"</div><p class="testimonial-text">Compramos exclusivamente micro-lotes de Jaén a través de AgroLink. La calidad es consistente y la transparencia con los productores marca la diferencia.</p><div class="testimonial-author"><div class="testimonial-avatar">🏪</div><div><div class="testimonial-name">Cafetería Origen</div><div class="testimonial-role">Lima, Perú</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contacto">
+    <div class="container">
+      <h2 class="cta-title">Transformemos juntos el <em style="color:var(--gold);font-style:italic">futuro del café peruano</em></h2>
+      <p class="cta-sub">Únete a la red de productores y compradores que están cambiando las reglas del juego.</p>
+      <div class="cta-buttons">
+        <button class="btn-primary" onclick="showPage('parcelas')">Explorar lotes →</button>
+        <button class="btn-secondary" onclick="showPage('productor')">Convertirme en productor</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER HOME -->
+  <div id="footer-home"></div>
+</div>
+
+<!-- ============================================================ PARCELAS PAGE -->
+<div id="page-parcelas" class="page">
+  <div class="marketplace-hero">
+    <div class="section-label" style="margin-bottom:.5rem">Marketplace</div>
+    <h1 style="font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--white);margin-bottom:.75rem">Micro-lotes de <span style="color:var(--gold);font-style:italic">especialidad</span></h1>
+    <p style="color:rgba(253,250,247,.7);margin-bottom:1.5rem">6 parcelas disponibles · Jaén y San Ignacio, Perú</p>
+    <div class="search-bar">
+      <input class="search-input" id="search-input" placeholder="Buscar por variedad, productor, ubicación..." oninput="filterParcelas()"/>
+      <button class="search-btn" onclick="filterParcelas()">🔍 Buscar</button>
+    </div>
+  </div>
+  <div class="filters" id="filters">
+    <button class="filter-chip active" onclick="setFilter('Todos',this)">Todos</button>
+    <button class="filter-chip" onclick="setFilter('Geisha',this)">Geisha</button>
+    <button class="filter-chip" onclick="setFilter('Caturra',this)">Caturra</button>
+    <button class="filter-chip" onclick="setFilter('Bourbon',this)">Bourbon</button>
+    <button class="filter-chip" onclick="setFilter('Typica',this)">Typica</button>
+    <button class="filter-chip" onclick="setFilter('Natural',this)">Natural</button>
+    <button class="filter-chip" onclick="setFilter('Washed',this)">Washed</button>
+    <button class="filter-chip" onclick="setFilter('Honey',this)">Honey</button>
+    <span class="filter-count" id="filter-count">6 resultados</span>
+  </div>
+  <div class="parcelas-grid" id="parcelas-grid"></div>
+  <div id="footer-parcelas"></div>
+</div>
+
+<!-- ============================================================ DETALLE PAGE -->
+<div id="page-detalle" class="page">
+  <div id="detalle-content"></div>
+  <div id="footer-detalle"></div>
+</div>
+
+<!-- ============================================================ REGISTRO PAGE -->
+<div id="page-registro" class="page">
+  <div class="registro-page">
+    <div class="registro-box">
+      <div style="text-align:center;margin-bottom:2.5rem">
+        <div class="section-label" style="margin-bottom:.75rem">Únete</div>
+        <h1 style="font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--white);margin-bottom:1rem">Conviértete en <span style="color:var(--gold);font-style:italic">Productor</span></h1>
+        <p style="color:rgba(253,250,247,.7);font-size:1.05rem;line-height:1.7">Únete a AgroLink Jaén y conecta tu café con compradores internacionales. Sin intermediarios, con trazabilidad total.</p>
+      </div>
+      <div class="registro-card">
+        <div id="registro-form">
+          <div class="form-row">
+            <div class="form-field"><label class="form-label">Nombre completo *</label><input class="form-input" id="reg-nombre" placeholder="Juan Pérez Díaz"/></div>
+            <div class="form-field"><label class="form-label">Teléfono / WhatsApp *</label><input class="form-input" id="reg-tel" placeholder="+51 976 123 456"/></div>
+          </div>
+          <div class="form-field"><label class="form-label">Correo electrónico *</label><input class="form-input" id="reg-email" placeholder="juan@ejemplo.com"/></div>
+          <div class="form-row">
+            <div class="form-field"><label class="form-label">Ubicación de la finca *</label><input class="form-input" id="reg-ubi" placeholder="San Ignacio, Cajamarca"/></div>
+            <div class="form-field"><label class="form-label">Tamaño de parcela (ha)</label><input class="form-input" id="reg-ha" placeholder="2.5 hectáreas"/></div>
+          </div>
+          <div class="form-field"><label class="form-label">Variedad de café</label>
+            <select class="form-select" id="reg-var">
+              <option value="">Seleccionar variedad</option>
+              <option>Caturra</option><option>Bourbon</option><option>Geisha</option><option>Typica</option><option>Pache</option><option>Catimor</option><option>Otra variedad</option>
+            </select>
+          </div>
+          <div class="form-field"><label class="form-label">Cuéntanos sobre tu finca</label><textarea class="form-textarea" id="reg-msg" placeholder="Describe tu finca, experiencia, proceso de cultivo, certificaciones..."></textarea></div>
+          <button class="btn-reservar" onclick="submitRegistro()">Enviar solicitud de registro →</button>
+          <p style="font-size:.78rem;color:var(--tl);text-align:center;margin-top:1rem">Al enviar, aceptas nuestros términos de uso. Tu información es confidencial.</p>
+        </div>
+        <div id="registro-success" style="display:none" class="success-box">
+          <div class="success-icon">🌿</div>
+          <div class="success-title">¡Solicitud enviada!</div>
+          <p class="success-text">Nuestro equipo revisará tu solicitud y te contactará en menos de 48 horas para el proceso de incorporación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ PERFIL PAGE -->
+<div id="page-perfil" class="page">
+  <div class="perfil-layout">
+    <!-- SIDEBAR -->
+    <aside class="perfil-sidebar">
+      <div class="perfil-avatar-wrap">
+        <div class="perfil-avatar">👤<div class="perfil-avatar-dot"></div></div>
+        <div class="perfil-name" id="sidebar-name">Alejandro Vega Ruiz</div>
+        <div class="perfil-email">a.vega@correo.com</div>
+        <span class="perfil-role-tag">Comprador Premium</span>
+      </div>
+      <nav class="perfil-nav">
+        <div class="perfil-nav-label">Navegación</div>
+        <div class="perfil-nav-item active" onclick="showPerfilTab('resumen',this)"><span class="perfil-nav-icon">📊</span>Resumen</div>
+        <div class="perfil-nav-item" onclick="showPerfilTab('parcelas',this)"><span class="perfil-nav-icon">🌿</span>Mis Parcelas<span class="perfil-nav-badge">3</span></div>
+        <div class="perfil-nav-item" onclick="showPerfilTab('historial',this)"><span class="perfil-nav-icon">🕐</span>Historial</div>
+        <div class="perfil-nav-item" onclick="showPerfilTab('cuenta',this)"><span class="perfil-nav-icon">⚙️</span>Mi Cuenta</div>
+        <div class="perfil-nav-label" style="margin-top:1rem">Plataforma</div>
+        <div class="perfil-nav-item" onclick="showPage('parcelas')"><span class="perfil-nav-icon">🛒</span>Explorar Parcelas</div>
+        <div class="perfil-nav-item" onclick="showPage('home')"><span class="perfil-nav-icon">🏠</span>Inicio</div>
+      </nav>
+      <div class="perfil-sidebar-footer">
+        <div style="font-size:.72rem;color:rgba(253,250,247,.35);margin-bottom:.75rem;text-align:center">Miembro desde Enero 2024</div>
+        <button class="btn-logout">🚪 Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="perfil-main">
+      <!-- TAB RESUMEN -->
+      <div class="perfil-tab active" id="tab-resumen">
+        <div class="perfil-topbar">
+          <div>
+            <div class="perfil-page-title">Buenos días, <span>Alejandro</span> 👋</div>
+            <div style="font-size:.85rem;color:var(--tl);margin-top:4px">Estado de tu portafolio cafetalero</div>
+          </div>
+          <div class="perfil-topbar-actions">
+            <button class="btn-outline-sm" onclick="showPerfilTab('parcelas',null)">🌿 Mis Parcelas</button>
+            <button class="btn-filled-sm" onclick="showPage('parcelas')">+ Explorar lotes</button>
+          </div>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card green"><div class="kpi-icon green">💰</div><div class="kpi-val">S/ 21,650</div><div class="kpi-label">Total invertido</div><span class="kpi-change up">↑ 3 lotes este año</span></div>
+          <div class="kpi-card gold"><div class="kpi-icon gold">🌿</div><div class="kpi-val">3</div><div class="kpi-label">Parcelas activas</div><span class="kpi-change up">↑ 2 en proceso</span></div>
+          <div class="kpi-card brown"><div class="kpi-icon brown">⚖️</div><div class="kpi-val">50 kg</div><div class="kpi-label">Café reservado</div><span class="kpi-change neutral">↗ 3 variedades</span></div>
+          <div class="kpi-card blue"><div class="kpi-icon blue">✈️</div><div class="kpi-val">1</div><div class="kpi-label">En exportación</div><span class="kpi-change up">● Bourbon → Japón</span></div>
+        </div>
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-header">
+              <div><div class="chart-title">Inversión mensual 2024</div><div class="chart-subtitle">Soles peruanos (S/)</div></div>
+            </div>
+            <div class="bar-chart" id="bar-chart-resumen"></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title" style="margin-bottom:1.5rem">Portafolio por variedad</div>
+            <div class="portfolio-row">
+              <div><div class="port-item-header"><span class="port-label">Geisha</span><span class="port-sub">25 kg · 55%</span></div><div class="progress-bar" style="height:8px"><div class="progress-fill" style="width:55%;background:var(--gl)"></div></div></div>
+              <div><div class="port-item-header"><span class="port-label">Bourbon</span><span class="port-sub">15 kg · 30%</span></div><div class="progress-bar" style="height:8px"><div class="progress-fill" style="width:30%;background:var(--gold)"></div></div></div>
+              <div><div class="port-item-header"><span class="port-label">Typica</span><span class="port-sub">10 kg · 15%</span></div><div class="progress-bar" style="height:8px"><div class="progress-fill" style="width:15%;background:#6366f1"></div></div></div>
+            </div>
+            <div style="text-align:center;margin-top:1.5rem">
+              <svg width="110" height="110" viewBox="0 0 110 110" style="transform:rotate(-90deg)">
+                <circle cx="55" cy="55" r="44" fill="none" stroke="var(--beige-d)" stroke-width="10"/>
+                <circle cx="55" cy="55" r="44" fill="none" stroke="var(--gl)" stroke-width="10" stroke-dasharray="245 32" stroke-linecap="round"/>
+              </svg>
+              <div style="font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--tl);margin-top:-.5rem">78% Financiado</div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Actividad reciente</div><button class="btn-outline-sm" onclick="showPerfilTab('historial',null)">Ver todo →</button></div>
+          <div class="historial-list" id="historial-resumen"></div>
+        </div>
+      </div>
+
+      <!-- TAB MIS PARCELAS -->
+      <div class="perfil-tab" id="tab-parcelas">
+        <div class="perfil-topbar">
+          <div><div class="perfil-page-title">Mis <span>Parcelas</span></div><div style="font-size:.85rem;color:var(--tl);margin-top:4px">3 lotes reservados · 50 kg en total</div></div>
+          <button class="btn-filled-sm" onclick="showPage('parcelas')">+ Reservar nuevo lote</button>
+        </div>
+        <div class="quick-stats-row">
+          <div class="quick-stat"><div class="quick-stat-icon">💰</div><div><div style="font-size:.75rem;color:var(--tl);text-transform:uppercase;letter-spacing:.06em">Total invertido</div><div class="quick-stat-val" style="color:var(--gl)">S/ 21,650</div></div></div>
+          <div class="quick-stat"><div class="quick-stat-icon">⚖️</div><div><div style="font-size:.75rem;color:var(--tl);text-transform:uppercase;letter-spacing:.06em">Café reservado</div><div class="quick-stat-val" style="color:var(--gold)">50 kg</div></div></div>
+          <div class="quick-stat"><div class="quick-stat-icon">📦</div><div><div style="font-size:.75rem;color:var(--tl);text-transform:uppercase;letter-spacing:.06em">Lotes activos</div><div class="quick-stat-val" style="color:#6366f1">3</div></div></div>
+        </div>
+        <div class="mis-parcelas-grid" id="mis-parcelas-grid"></div>
+        <div style="margin-top:2rem;text-align:center">
+          <p style="color:var(--tl);margin-bottom:1rem;font-size:.9rem">¿Quieres diversificar tu portafolio cafetalero?</p>
+          <button class="btn-filled-sm" onclick="showPage('parcelas')">🛒 Explorar más micro-lotes</button>
+        </div>
+      </div>
+
+      <!-- TAB HISTORIAL -->
+      <div class="perfil-tab" id="tab-historial">
+        <div class="perfil-topbar"><div><div class="perfil-page-title">Historial de <span>Actividad</span></div><div style="font-size:.85rem;color:var(--tl);margin-top:4px">6 eventos registrados en tu cuenta</div></div></div>
+        <div class="chart-card">
+          <div style="display:flex;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap">
+            <span style="padding:5px 14px;border-radius:100px;font-size:.8rem;font-weight:500;background:var(--gd);color:white;cursor:pointer">Todos</span>
+            <span style="padding:5px 14px;border-radius:100px;font-size:.8rem;font-weight:500;background:var(--beige);color:var(--tm);border:1px solid var(--beige-d);cursor:pointer">Reservas</span>
+            <span style="padding:5px 14px;border-radius:100px;font-size:.8rem;font-weight:500;background:var(--beige);color:var(--tm);border:1px solid var(--beige-d);cursor:pointer">Pagos</span>
+            <span style="padding:5px 14px;border-radius:100px;font-size:.8rem;font-weight:500;background:var(--beige);color:var(--tm);border:1px solid var(--beige-d);cursor:pointer">Actualizaciones</span>
+            <span style="padding:5px 14px;border-radius:100px;font-size:.8rem;font-weight:500;background:var(--beige);color:var(--tm);border:1px solid var(--beige-d);cursor:pointer">Exportaciones</span>
+          </div>
+          <div class="historial-list" id="historial-full"></div>
+        </div>
+      </div>
+
+      <!-- TAB MI CUENTA -->
+      <div class="perfil-tab" id="tab-cuenta">
+        <div class="perfil-topbar">
+          <div><div class="perfil-page-title">Mi <span>Cuenta</span></div><div style="font-size:.85rem;color:var(--tl);margin-top:4px">Gestiona tu información personal</div></div>
+          <div class="perfil-topbar-actions">
+            <button class="btn-outline-sm" id="btn-cancel-edit" style="display:none" onclick="cancelEdit()">Cancelar</button>
+            <button class="btn-filled-sm" id="btn-edit-save" onclick="toggleEdit()">✏️ Editar perfil</button>
+          </div>
+        </div>
+        <div class="chart-card" style="margin-bottom:1.25rem">
+          <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap">
+            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--bl));display:flex;align-items:center;justify-content:center;font-size:2rem;border:3px solid var(--beige-d);flex-shrink:0">👤</div>
+            <div>
+              <div style="font-family:var(--fd);font-size:1.3rem;font-weight:700" id="cuenta-nombre-display">Alejandro Vega Ruiz</div>
+              <div style="color:var(--tl);font-size:.88rem" id="cuenta-correo-display">a.vega@correo.com</div>
+              <span class="perfil-role-tag" style="display:inline-block;margin-top:6px">Comprador Premium</span>
+            </div>
+          </div>
+          <div class="chart-title" style="margin-bottom:1rem">Información personal</div>
+          <div class="perfil-info-grid">
+            <div class="info-field"><div class="info-field-label">Nombre completo</div><div id="field-nombre" class="info-field-val">Alejandro Vega Ruiz</div></div>
+            <div class="info-field"><div class="info-field-label">Correo electrónico</div><div id="field-correo" class="info-field-val">a.vega@correo.com</div></div>
+            <div class="info-field"><div class="info-field-label">País</div><div class="info-field-val">Perú 🇵🇪</div></div>
+            <div class="info-field"><div class="info-field-label">Tipo de usuario</div><div class="info-field-val">Comprador Premium</div></div>
+            <div class="info-field"><div class="info-field-label">Miembro desde</div><div class="info-field-val">Enero 2024</div></div>
+            <div class="info-field"><div class="info-field-label">Verificación</div><div class="info-field-val">✓ Cuenta verificada</div></div>
+          </div>
+        </div>
+        <div class="chart-card" style="margin-bottom:1.25rem">
+          <div class="chart-title" style="margin-bottom:1.25rem">Seguridad</div>
+          <div class="seguridad-item"><span class="seg-icon">🔐</span><div class="seg-info"><div class="seg-label">Contraseña</div><div class="seg-sub">Última actualización: hace 3 meses</div></div><button class="seg-btn">Cambiar</button></div>
+          <div class="seguridad-item"><span class="seg-icon">📱</span><div class="seg-info"><div class="seg-label">Autenticación de dos factores</div><div class="seg-sub">No activado</div></div><button class="seg-btn">Activar</button></div>
+          <div class="seguridad-item"><span class="seg-icon">🔔</span><div class="seg-info"><div class="seg-label">Notificaciones de cosecha</div><div class="seg-sub">Activadas por correo</div></div><button class="seg-btn">Configurar</button></div>
+        </div>
+        <div class="danger-zone">
+          <div class="danger-card chart-card">
+            <div class="chart-title" style="margin-bottom:1rem">Preferencias de inversión</div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--beige-d);font-size:.85rem"><span style="color:var(--tl)">Variedades favoritas</span><span style="font-weight:600">Geisha, Bourbon</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--beige-d);font-size:.85rem"><span style="color:var(--tl)">Procesos preferidos</span><span style="font-weight:600">Natural, Honey</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--beige-d);font-size:.85rem"><span style="color:var(--tl)">Inversión mensual máx.</span><span style="font-weight:600">S/ 15,000</span></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0;font-size:.85rem"><span style="color:var(--tl)">Región preferida</span><span style="font-weight:600">Jaén · San Ignacio</span></div>
+          </div>
+          <div class="danger-card chart-card">
+            <div class="chart-title" style="margin-bottom:1rem">Zona de peligro</div>
+            <p style="font-size:.85rem;color:var(--tl);margin-bottom:1rem;line-height:1.5">Estas acciones son irreversibles. Procede con cuidado.</p>
+            <button class="danger-btn" style="background:var(--beige);border:1px solid var(--beige-d);color:var(--tm)">⬇️ Descargar mis datos</button>
+            <button class="danger-btn" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#dc2626">🗑️ Eliminar cuenta</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ============================================================ PRODUCTOR PAGE -->
+<div id="page-productor" class="page">
+
+  <!-- HERO -->
+  <div class="productor-hero">
+    <div class="productor-hero-content">
+      <div class="productor-hero-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block"></span>Para Productores</div>
+      <h1>Tu café merece llegar al <em>mundo entero</em></h1>
+      <p>Únete a la red de productores de Jaén que están vendiendo directamente a compradores internacionales, sin intermediarios y con mejores precios.</p>
+      <button class="btn-primary" onclick="document.getElementById('form-productor').scrollIntoView({behavior:'smooth'})">Registrarme ahora →</button>
+      <div class="productor-stats-row">
+        <div class="productor-stat"><div class="productor-stat-num">120+</div><div class="productor-stat-label">Productores activos</div></div>
+        <div class="productor-stat"><div class="productor-stat-num">S/ 2.8M</div><div class="productor-stat-label">Pagado a productores</div></div>
+        <div class="productor-stat"><div class="productor-stat-num">15+</div><div class="productor-stat-label">Países compradores</div></div>
+        <div class="productor-stat"><div class="productor-stat-num">48h</div><div class="productor-stat-label">Tiempo de respuesta</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFICIOS -->
+  <div class="beneficios-productor">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">¿Por qué unirte?</div>
+        <h2 class="section-title">Todo lo que ganas al ser <em>parte de AgroLink</em></h2>
+        <p class="section-subtitle" style="margin:0 auto">Una plataforma diseñada para que el productor reciba lo que realmente merece por su trabajo.</p>
+      </div>
+      <div class="beneficios-grid-new">
+        <div class="beneficio-card">
+          <div class="beneficio-icon">💰</div>
+          <div class="beneficio-title">Financiamiento anticipado</div>
+          <div class="beneficio-text">Recibe capital antes de la cosecha. Los compradores financian tu lote desde la etapa de floración, sin necesidad de préstamos bancarios.</div>
+        </div>
+        <div class="beneficio-card">
+          <div class="beneficio-icon">🌍</div>
+          <div class="beneficio-title">Acceso a mercados globales</div>
+          <div class="beneficio-text">Conectamos tu café con tostadores y cafeterías de Europa, Asia y EE.UU. que pagan precios premium por especialidad.</div>
+        </div>
+        <div class="beneficio-card">
+          <div class="beneficio-icon">📊</div>
+          <div class="beneficio-title">Trazabilidad digital gratuita</div>
+          <div class="beneficio-text">Te proveemos un sistema de trazabilidad completo que certifica tu proceso y aumenta el valor percibido de tu café.</div>
+        </div>
+        <div class="beneficio-card">
+          <div class="beneficio-icon">🤝</div>
+          <div class="beneficio-title">Precios justos garantizados</div>
+          <div class="beneficio-text">Sin coyotes ni intermediarios. El precio se negocia directamente contigo y recibes entre 30–60% más que el mercado tradicional.</div>
+        </div>
+        <div class="beneficio-card">
+          <div class="beneficio-icon">🎓</div>
+          <div class="beneficio-title">Capacitación y soporte</div>
+          <div class="beneficio-text">Acceso a talleres de mejora de calidad, gestión de procesos y certificaciones orgánicas sin costo adicional.</div>
+        </div>
+        <div class="beneficio-card">
+          <div class="beneficio-icon">📱</div>
+          <div class="beneficio-title">Plataforma 100% digital</div>
+          <div class="beneficio-text">Gestiona tu lote, comunícate con compradores y recibe pagos desde tu celular. Simple y sin papeleos innecesarios.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CÓMO FUNCIONA -->
+  <div class="como-unirse">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Proceso</div>
+        <h2 class="section-title">¿Cómo funciona para el <em>productor</em>?</h2>
+      </div>
+      <div class="pasos-grid">
+        <div class="paso-item">
+          <div class="paso-num">1</div>
+          <div class="paso-title">Te registras</div>
+          <div class="paso-text">Completas el formulario con los datos de tu finca. Te contactamos en 48 horas.</div>
+        </div>
+        <div class="paso-item">
+          <div class="paso-num">2</div>
+          <div class="paso-title">Verificación</div>
+          <div class="paso-text">Un agrónomo visita tu parcela, evalúa calidad y la incorpora a la plataforma.</div>
+        </div>
+        <div class="paso-item">
+          <div class="paso-num">3</div>
+          <div class="paso-title">Tu lote se publica</div>
+          <div class="paso-text">Compradores internacionales pueden ver y pre-financiar tu cosecha.</div>
+        </div>
+        <div class="paso-item">
+          <div class="paso-num">4</div>
+          <div class="paso-title">Cobras y exportas</div>
+          <div class="paso-text">Recibimos el café, coordinamos la exportación y te transferimos el pago.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASOS DE ÉXITO -->
+  <div class="casos-exito">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label" style="color:var(--gold)">Casos de éxito</div>
+        <h2 class="section-title" style="color:var(--white)">Productores que ya están <em>creciendo con nosotros</em></h2>
+        <p class="section-subtitle" style="color:rgba(253,250,247,.65);margin:0 auto">Ellos dieron el primer paso. Hoy sus cafés llegan a Berlín, Tokio y Nueva York.</p>
+      </div>
+      <div class="casos-grid">
+        <div class="caso-card">
+          <div class="caso-foto bg-farm">🌿<div class="caso-badge">Miembro desde 2022</div></div>
+          <div class="caso-body">
+            <div class="stars-white">★★★★★</div>
+            <div class="caso-nombre">Juan Pérez Díaz</div>
+            <div class="caso-lugar">📍 San Ignacio, Cajamarca</div>
+            <div class="caso-quote">Antes vendía a S/ 8 el kilo. Ahora con AgroLink mi Geisha se exporta a S/ 45 el kilo a Japón. Mi familia por fin vive del café.</div>
+            <div class="caso-stats">
+              <div class="caso-stat"><div class="caso-stat-val">S/ 45/kg</div><div class="caso-stat-key">Precio obtenido</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">460%</div><div class="caso-stat-key">Vs precio local</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">3 lotes</div><div class="caso-stat-key">Exportados</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">Japón 🇯🇵</div><div class="caso-stat-key">Destino</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="caso-card">
+          <div class="caso-foto bg-amber">☕<div class="caso-badge">Miembro desde 2023</div></div>
+          <div class="caso-body">
+            <div class="stars-white">★★★★★</div>
+            <div class="caso-nombre">María Luz Condori</div>
+            <div class="caso-lugar">📍 Chirinos, Jaén</div>
+            <div class="caso-quote">Como mujer productora, nunca tuve acceso a los compradores grandes. AgroLink me dio esa puerta. Mis Caturras llegan ahora a Alemania y Chile.</div>
+            <div class="caso-stats">
+              <div class="caso-stat"><div class="caso-stat-val">S/ 28/kg</div><div class="caso-stat-key">Precio obtenido</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">250%</div><div class="caso-stat-key">Vs precio local</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">5 lotes</div><div class="caso-stat-key">Exportados</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">Alemania 🇩🇪</div><div class="caso-stat-key">Destino</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="caso-card">
+          <div class="caso-foto bg-mountain">🏔️<div class="caso-badge">Miembro desde 2022</div></div>
+          <div class="caso-body">
+            <div class="stars-white">★★★★★</div>
+            <div class="caso-nombre">Carlos Huamán Ríos</div>
+            <div class="caso-lugar">📍 Huarango, San Ignacio</div>
+            <div class="caso-quote">El financiamiento anticipado cambió todo. Compré mejores insumos, mejoré el proceso honey y ahora tengo una lista de espera de compradores.</div>
+            <div class="caso-stats">
+              <div class="caso-stat"><div class="caso-stat-val">S/ 38/kg</div><div class="caso-stat-key">Precio obtenido</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">340%</div><div class="caso-stat-key">Vs precio local</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">4 lotes</div><div class="caso-stat-key">Exportados</div></div>
+              <div class="caso-stat"><div class="caso-stat-val">EE.UU. 🇺🇸</div><div class="caso-stat-key">Destino</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO DE REGISTRO -->
+  <div class="registro-productor" id="form-productor">
+    <div class="container">
+      <div class="registro-productor-card">
+        <div class="registro-productor-header">
+          <div class="section-label">Únete gratis</div>
+          <h2 style="font-family:var(--fd);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:700;color:var(--td);margin-bottom:.75rem">Registra tu finca en <span style="color:var(--gl);font-style:italic">AgroLink Jaén</span></h2>
+          <p style="color:var(--tl);font-size:.95rem;line-height:1.6">Completa el formulario y te contactamos en menos de 48 horas para el proceso de incorporación.</p>
+        </div>
+        <div id="registro-prod-form">
+          <div class="form-row">
+            <div class="form-field"><label class="form-label">Nombre completo *</label><input class="form-input" id="prod-nombre" placeholder="Juan Pérez Díaz"/></div>
+            <div class="form-field"><label class="form-label">Teléfono / WhatsApp *</label><input class="form-input" id="prod-tel" placeholder="+51 976 123 456"/></div>
+          </div>
+          <div class="form-field"><label class="form-label">Correo electrónico *</label><input class="form-input" id="prod-email" placeholder="juan@ejemplo.com"/></div>
+          <div class="form-row">
+            <div class="form-field"><label class="form-label">Ubicación de la finca *</label><input class="form-input" id="prod-ubi" placeholder="San Ignacio, Cajamarca"/></div>
+            <div class="form-field"><label class="form-label">Tamaño de parcela (ha)</label><input class="form-input" id="prod-ha" placeholder="2.5 hectáreas"/></div>
+          </div>
+          <div class="form-field"><label class="form-label">Variedad de café</label>
+            <select class="form-select" id="prod-var">
+              <option value="">Seleccionar variedad</option>
+              <option>Caturra</option><option>Bourbon</option><option>Geisha</option><option>Typica</option><option>Pache</option><option>Catimor</option><option>Otra variedad</option>
+            </select>
+          </div>
+          <div class="form-field"><label class="form-label">Cuéntanos sobre tu finca</label><textarea class="form-textarea" id="prod-msg" placeholder="Describe tu finca, experiencia, proceso de cultivo, certificaciones..."></textarea></div>
+
+          <div class="form-field">
+            <label class="form-label">Certificaciones y documentos <span style="font-weight:400;color:var(--tl)">(opcional)</span></label>
+            <div class="upload-zone" id="upload-zone" onclick="document.getElementById('prod-files').click()" ondragover="uploadDragOver(event)" ondragleave="uploadDragLeave(event)" ondrop="uploadDrop(event)">
+              <input type="file" id="prod-files" multiple accept=".pdf,.jpg,.jpeg,.png,.webp" style="display:none" onchange="uploadFilesSelected(this.files)"/>
+              <div class="upload-icon">📂</div>
+              <div class="upload-text">Haz clic para subir o arrastra tus archivos aquí</div>
+              <div class="upload-formats">PDF · JPG · PNG · WEBP &nbsp;·&nbsp; Máx. 10 MB por archivo</div>
+            </div>
+            <div class="upload-list" id="upload-list"></div>
+          </div>
+
+          <button class="btn-reservar" onclick="submitProdRegistro()">Enviar solicitud de registro →</button>
+          <p style="font-size:.78rem;color:var(--tl);text-align:center;margin-top:1rem">Al enviar, aceptas nuestros términos de uso. Tu información es confidencial y nunca será compartida.</p>
+        </div>
+        <div id="registro-prod-success" style="display:none" class="success-box">
+          <div class="success-icon">🌿</div>
+          <div class="success-title">¡Solicitud enviada!</div>
+          <p class="success-text">Nuestro equipo revisará tu información y te contactará en menos de 48 horas para comenzar el proceso de incorporación.</p>
+          <button class="btn-reservar" style="margin-top:1.5rem;max-width:300px;margin-left:auto;margin-right:auto;display:block" onclick="showPage('home')">Volver al inicio</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-productor"></div>
+</div>
+
+<!-- ============================================================ RESERVA CONFIRM MODAL -->
+<div id="reserva-modal-overlay" class="reserva-modal-overlay" onclick="if(event.target===this)cerrarReservaModal()">
+  <div class="reserva-modal">
+    <div class="reserva-modal-header">
+      <div class="reserva-modal-header-title">☕ Confirmar solicitud de reserva</div>
+      <div class="reserva-modal-header-sub">Revisa los detalles antes de enviar tu solicitud</div>
+      <button class="reserva-modal-close" onclick="cerrarReservaModal()">✕</button>
+    </div>
+    <div class="reserva-modal-body">
+      <div class="reserva-modal-highlight">
+        <div>
+          <div class="reserva-modal-kg" id="reserva-modal-kg">—</div>
+          <div class="reserva-modal-kg-label">Cantidad reservada</div>
+        </div>
+        <div style="width:1px;background:var(--beige-d);align-self:stretch"></div>
+        <div style="text-align:right">
+          <div class="reserva-modal-total" id="reserva-modal-total">—</div>
+          <div class="reserva-modal-total-label">Total a pagar</div>
+        </div>
+      </div>
+
+      <div class="reserva-modal-info-title">Información del trato</div>
+      <div class="reserva-modal-info-grid">
+        <div class="reserva-modal-info-item">
+          <div class="reserva-modal-info-label">Precio por kg</div>
+          <div class="reserva-modal-info-val" id="reserva-modal-precio-kg">—</div>
+        </div>
+        <div class="reserva-modal-info-item">
+          <div class="reserva-modal-info-label">Productor</div>
+          <div class="reserva-modal-info-val" id="reserva-modal-productor">—</div>
+        </div>
+      </div>
+
+      <div class="reserva-modal-info-title">Información de la finca</div>
+      <div class="reserva-modal-info-grid">
+        <div class="reserva-modal-info-item" style="grid-column:1/-1">
+          <div class="reserva-modal-info-label">Nombre del lote</div>
+          <div class="reserva-modal-info-val" id="reserva-modal-finca">—</div>
+        </div>
+        <div class="reserva-modal-info-item">
+          <div class="reserva-modal-info-label">Ubicación</div>
+          <div class="reserva-modal-info-val" id="reserva-modal-ubicacion">—</div>
+        </div>
+        <div class="reserva-modal-info-item">
+          <div class="reserva-modal-info-label">Variedad</div>
+          <div class="reserva-modal-info-val" id="reserva-modal-variedad">—</div>
+        </div>
+        <div class="reserva-modal-info-item">
+          <div class="reserva-modal-info-label">Altitud</div>
+          <div class="reserva-modal-info-val" id="reserva-modal-altitud">—</div>
+        </div>
+        <div class="reserva-modal-info-item">
+          <div class="reserva-modal-info-label">Proceso</div>
+          <div class="reserva-modal-info-val" id="reserva-modal-proceso">—</div>
+        </div>
+      </div>
+
+      <div class="reserva-modal-divider"></div>
+      <div class="reserva-modal-note">
+        ✓ Al enviar tu solicitud, el productor recibirá una notificación y se pondrá en contacto contigo para coordinar el pago y los detalles finales. Sin comisiones ocultas.
+      </div>
+
+      <button class="btn-confirmar-reserva" id="btn-confirmar-reserva" onclick="confirmarReserva()">
+        📨 Enviar solicitud de reserva
+      </button>
+      <button class="btn-cancelar-reserva" onclick="cerrarReservaModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ MODAL REGISTRO -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div class="section-label" style="margin-bottom:4px">Únete como productor</div><div class="modal-title">Registra tu parcela</div></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-form-content">
+      <p style="color:var(--tl);font-size:.9rem;margin-bottom:1.5rem">Únete a AgroLink Jaén y conecta tu café con compradores internacionales.</p>
+      <div class="form-row">
+        <div class="form-field"><label class="form-label">Nombre *</label><input class="form-input" id="m-nombre" placeholder="Tu nombre completo"/></div>
+        <div class="form-field"><label class="form-label">Teléfono *</label><input class="form-input" id="m-tel" placeholder="+51 976 000 000"/></div>
+      </div>
+      <div class="form-field"><label class="form-label">Correo electrónico *</label><input class="form-input" id="m-email" placeholder="tu@correo.com"/></div>
+      <div class="form-row">
+        <div class="form-field"><label class="form-label">Ubicación</label><input class="form-input" id="m-ubi" placeholder="San Ignacio, Jaén..."/></div>
+        <div class="form-field"><label class="form-label">Tamaño de parcela</label><input class="form-input" id="m-ha" placeholder="2.5 ha"/></div>
+      </div>
+      <div class="form-field"><label class="form-label">Variedad de café</label>
+        <select class="form-select" id="m-var">
+          <option value="">Seleccionar...</option>
+          <option>Caturra</option><option>Bourbon</option><option>Geisha</option><option>Typica</option><option>Pache</option><option>Catimor</option><option>Otra</option>
+        </select>
+      </div>
+      <button class="btn-reservar" onclick="submitModal()">Enviar solicitud →</button>
+    </div>
+    <div id="modal-success" style="display:none" class="success-box">
+      <div class="success-icon">🌿</div>
+      <div class="success-title" id="modal-success-name">¡Bienvenido!</div>
+      <p class="success-text">Tu solicitud fue recibida. Te contactaremos en 48 horas.</p>
+      <button class="btn-reservar" style="margin-top:1.5rem" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ FOOTER TEMPLATE -->
+<template id="footer-tpl">
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">AgroLink <span>Jaén</span></div>
+        <p class="footer-desc">Plataforma de crowdfarming y trazabilidad digital que conecta productores de café de especialidad de Jaén, Perú con compradores internacionales.</p>
+        <div class="footer-socials">
+          <div class="social-btn">🌐</div><div class="social-btn">📷</div><div class="social-btn">💼</div><div class="social-btn">🐦</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Plataforma</div>
+        <ul class="footer-links">
+          <li><a onclick="showPage('parcelas')">Explorar parcelas</a></li>
+          <li><a onclick="showPage('productor')">Ser productor</a></li>
+          <li><a>Cómo funciona</a></li><li><a>Trazabilidad</a></li><li><a>Precios</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <ul class="footer-links"><li><a>Sobre nosotros</a></li><li><a>Blog</a></li><li><a>Prensa</a></li><li><a>Sostenibilidad</a></li><li><a>Trabaja con nosotros</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contacto</div>
+        <div class="footer-contact-item">📧 <span>hola@agrolinkjaen.pe</span></div>
+        <div class="footer-contact-item">📞 <span>+51 976 123 456</span></div>
+        <div class="footer-contact-item">📍 <span>Jaén, Cajamarca, Perú</span></div>
+        <div class="footer-contact-item">🕐 <span>Lun - Vie: 9am - 6pm</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 AgroLink Jaén. Todos los derechos reservados.</span>
+      <div class="footer-legal"><a>Privacidad</a><a>Términos</a><a>Cookies</a></div>
+    </div>
+  </footer>
+</template>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const PARCELAS = [
+  {
+    id:"geisha-juan-perez", name:"Geisha Finca El Edén", producer:"Juan Pérez Díaz",
+    location:"San Ignacio, Cajamarca", variedad:"Geisha", altitud:"2,100 msnm",
+    financiado:78, etapa:"Floración", precio:"S/ 480/kg", proceso:"Natural",
+    loteKg:120, bgClass:"bg-farm", emoji:"🌿",
+    historia:"Juan Pérez inició su finca hace 15 años con la visión de producir café de altísima calidad en las montañas de San Ignacio. Hoy cultiva varietales raros como la Geisha en suelos volcánicos a más de 2,100 metros sobre el nivel del mar.",
+    clima:"Templado húmedo, 18-22°C", sabor:["Jazmín","Melocotón","Bergamota","Té blanco"],
+    certs:["Orgánico","Rainforest Alliance","Cup of Excellence"],
+    timeline:[
+      {emoji:"🌱",name:"Siembra & Vivero",date:"Mar 2024",status:"done",text:"Selección y germinación de semillas Geisha de primera calidad. 1,200 plántulas preparadas en vivero controlado.",metrics:[{k:"Plántulas",v:"1,200"},{k:"Germinación",v:"94%"},{k:"Semanas",v:"8"}]},
+      {emoji:"🌸",name:"Floración",date:"Ago 2024",status:"progress",text:"Las flores blancas cubren las ramas. Alta densidad floral indica buena cosecha proyectada para octubre.",metrics:[{k:"Floreo",v:"91%"},{k:"Densidad",v:"Alta"},{k:"Pronóstico",v:"Oct"}]},
+      {emoji:"🍒",name:"Cosecha Selectiva",date:"Oct 2024",status:"pending",text:"Recolección manual cherry por cherry, solo frutos en su punto exacto de madurez.",metrics:[{k:"Producción",v:"~4.2 ton"},{k:"Método",v:"Selectivo"},{k:"Personal",v:"18 personas"}]},
+      {emoji:"☀️",name:"Secado Natural",date:"Nov 2024",status:"pending",text:"Proceso natural en camas africanas durante 30 días, con volteo constante y control de humedad.",metrics:[{k:"Días",v:"30"},{k:"Humedad",v:"11%"},{k:"Camas",v:"24"}]},
+      {emoji:"✈️",name:"Exportación",date:"Dic 2024",status:"pending",text:"Embarque en contenedores refrigerados hacia mercados de Europa y Japón.",metrics:[{k:"Destino",v:"Europa/JP"},{k:"Sacos",v:"48"},{k:"Kg neto",v:"2,880"}]},
+    ]
+  },
+  {
+    id:"caturra-finca-luz", name:"Caturra Finca La Luz", producer:"María Luz Condori",
+    location:"Chirinos, Jaén", variedad:"Caturra", altitud:"1,800 msnm",
+    financiado:55, etapa:"Cosecha", precio:"S/ 320/kg", proceso:"Washed",
+    loteKg:200, bgClass:"bg-amber", emoji:"☕",
+    historia:"María Luz representa la nueva generación de productoras cafetaleras de Jaén. Heredó la finca de su padre y la transformó con prácticas agroforestales modernas, integrando sistemas silvopastoriles que mejoran la calidad del suelo.",
+    clima:"Cálido-húmedo, 20-26°C", sabor:["Chocolate oscuro","Caramelo","Nuez","Mandarina"],
+    certs:["Comercio Justo","UTZ Certified","Orgánico"],
+    timeline:[
+      {emoji:"🌱",name:"Siembra & Vivero",date:"Ene 2024",status:"done",text:"Siembra de 800 plantas Caturra en parcela renovada tras plan de replante.",metrics:[{k:"Plantas",v:"800"},{k:"Edad",v:"2 años"},{k:"Vigor",v:"Excelente"}]},
+      {emoji:"🌸",name:"Floración",date:"May 2024",status:"done",text:"Floración uniforme completada. Excelente cuajado de frutos confirmado.",metrics:[{k:"Cuajado",v:"88%"},{k:"Densidad",v:"Media-Alta"},{k:"Estado",v:"✓ OK"}]},
+      {emoji:"🍒",name:"Cosecha Selectiva",date:"Sep 2024",status:"progress",text:"En proceso de recolección. 60% del lote ya cosechado con parámetros de calidad superiores.",metrics:[{k:"Avance",v:"60%"},{k:"Brix",v:"22°"},{k:"Rechazo",v:"<3%"}]},
+      {emoji:"☀️",name:"Secado Lavado",date:"Oct 2024",status:"pending",text:"Proceso lavado en canal de flotación y secado en carpa solar.",metrics:[{k:"Días",v:"15"},{k:"Humedad",v:"10.5%"},{k:"Tanks",v:"4"}]},
+      {emoji:"✈️",name:"Exportación",date:"Nov 2024",status:"pending",text:"Contenedor refrigerado hacia tostadores especializados en Europa.",metrics:[{k:"Destino",v:"Alemania"},{k:"Sacos",v:"80"},{k:"Kg neto",v:"4,800"}]},
+    ]
+  },
+  {
+    id:"bourbon-jaen", name:"Bourbon Rojo Alto Huallaga", producer:"Carlos Huamán Ríos",
+    location:"Huarango, San Ignacio", variedad:"Bourbon Rojo", altitud:"1,950 msnm",
+    financiado:92, etapa:"Secado", precio:"S/ 410/kg", proceso:"Honey",
+    loteKg:80, bgClass:"bg-mountain", emoji:"🏔️",
+    historia:"Carlos Huamán es un pionero del proceso honey en la zona norte del Perú. Su finca Alto Huallaga está ubicada en un microclima único donde la neblina constante y los suelos ricos en minerales producen un Bourbon de perfil único en el mundo.",
+    clima:"Neblina constante, 15-20°C", sabor:["Panela","Damasco seco","Pasas","Especias"],
+    certs:["Specialty Coffee","Biodinámico","Rainforest"],
+    timeline:[
+      {emoji:"🌱",name:"Siembra",date:"Dic 2023",status:"done",text:"Transplante de plantas madre seleccionadas genéticamente por 20 años de mejoramiento local.",metrics:[{k:"Plantas",v:"650"},{k:"Selección",v:"Genética"},{k:"Piso",v:"1,950m"}]},
+      {emoji:"🌸",name:"Floración",date:"Abr 2024",status:"done",text:"Floración excepcional. La niebla constante favorece el desarrollo aromático.",metrics:[{k:"Cuajado",v:"95%"},{k:"Aroma",v:"Intenso"},{k:"Niebla",v:"280 días/año"}]},
+      {emoji:"🍒",name:"Cosecha",date:"Ago 2024",status:"done",text:"Cosecha completada. Brix promedio de 24°, indicador de concentración de azúcares excepcional.",metrics:[{k:"Brix",v:"24°"},{k:"Peso",v:"3.1 ton"},{k:"Días",v:"22"}]},
+      {emoji:"☀️",name:"Secado Honey",date:"Sep 2024",status:"progress",text:"En proceso honey: mucílago preservado al 80%. Camas africanas con volteo cada 4 horas.",metrics:[{k:"Mucílago",v:"80%"},{k:"Humedad",v:"13%→11%"},{k:"Días",v:"25/35"}]},
+      {emoji:"✈️",name:"Exportación",date:"Oct 2024",status:"pending",text:"Pre-venta completada al 92%. Envío a Japón y Australia confirmado.",metrics:[{k:"Destino",v:"Japón/AU"},{k:"Reservado",v:"92%"},{k:"Estado",v:"Confirmado"}]},
+    ]
+  },
+  {
+    id:"pache-san-ignacio", name:"Pache San Ignacio Natural", producer:"Rosa Mendoza Tello",
+    location:"La Coipa, San Ignacio", variedad:"Pache", altitud:"1,750 msnm",
+    financiado:34, etapa:"Floración", precio:"S/ 290/kg", proceso:"Natural",
+    loteKg:300, bgClass:"bg-farm", emoji:"🌺",
+    historia:"Rosa Mendoza lidera una cooperativa de 8 familias productoras en La Coipa. Su enfoque en el proceso natural y el respeto a los ciclos ecológicos la ha convertido en referente de sostenibilidad en la región.",
+    clima:"Tropical de montaña, 22-28°C", sabor:["Frutos rojos","Uva pasa","Ron","Cacao"],
+    certs:["Orgánico","Comercio Justo"],
+    timeline:[
+      {emoji:"🌱",name:"Siembra",date:"Feb 2024",status:"done",text:"Cooperativa de 8 familias inició ciclo conjunto para estandarizar calidad.",metrics:[{k:"Familias",v:"8"},{k:"Has",v:"12"},{k:"Plantas",v:"2,400"}]},
+      {emoji:"🌸",name:"Floración",date:"Jul 2024",status:"progress",text:"Inicio de floración en todas las parcelas de la cooperativa.",metrics:[{k:"Avance",v:"45%"},{k:"Parcelas",v:"8/8"},{k:"Salud",v:"Buena"}]},
+      {emoji:"🍒",name:"Cosecha",date:"Nov 2024",status:"pending",text:"Cosecha programada. Se proyectan 3.5 ton entre todas las familias.",metrics:[{k:"Proyección",v:"3.5 ton"},{k:"Método",v:"Manual"},{k:"Días",v:"30"}]},
+      {emoji:"☀️",name:"Secado",date:"Dic 2024",status:"pending",text:"Secado natural en patio de concreto y camas elevadas.",metrics:[{k:"Duración",v:"21 días"},{k:"Patio m²",v:"800"},{k:"Camas",v:"32"}]},
+      {emoji:"✈️",name:"Exportación",date:"Ene 2025",status:"pending",text:"Envío programado a Países Bajos y EE.UU.",metrics:[{k:"Destino",v:"NL/USA"},{k:"Contenedor",v:"1x20ft"},{k:"Kg",v:"7,200"}]},
+    ]
+  },
+  {
+    id:"typica-huabal", name:"Typica Antiguo Huabal", producer:"Segundo Torres Chuquibalqui",
+    location:"Huabal, Jaén", variedad:"Typica", altitud:"2,000 msnm",
+    financiado:68, etapa:"Floración", precio:"S/ 350/kg", proceso:"Washed",
+    loteKg:160, bgClass:"bg-amber", emoji:"🌾",
+    historia:"Segundo Torres preserva una de las pocas plantaciones de Typica puro de la región, variedades que datan de más de 60 años. Su compromiso con la herencia cafetalera andina lo ha convertido en custodio del patrimonio genético del café peruano.",
+    clima:"Frío andino, 14-19°C", sabor:["Manzana verde","Miel de abeja","Limón sutil","Avellana"],
+    certs:["Herencia Cafetalera","Orgánico","UTZ"],
+    timeline:[
+      {emoji:"🌱",name:"Siembra",date:"Nov 2023",status:"done",text:"Renovación con material genético de plantas madres de 60+ años.",metrics:[{k:"Plantas",v:"1,050"},{k:"Edad genética",v:"60 años"},{k:"Msnm",v:"2,000"}]},
+      {emoji:"🌸",name:"Floración",date:"Jun 2024",status:"progress",text:"Floración tardía típica de zonas altas. Excelente desarrollo aromático.",metrics:[{k:"Avance",v:"70%"},{k:"Aroma",v:"Floral intenso"},{k:"T°",v:"16°C prom."}]},
+      {emoji:"🍒",name:"Cosecha",date:"Dic 2024",status:"pending",text:"Cosecha proyectada para diciembre, típica de altitudes sobre 2,000 msnm.",metrics:[{k:"Proyección",v:"2.8 ton"},{k:"Pico cosecha",v:"Dic"},{k:"Selectivo",v:"100%"}]},
+      {emoji:"☀️",name:"Secado",date:"Ene 2025",status:"pending",text:"Lavado con agua de manantial y secado en camas elevadas.",metrics:[{k:"Agua",v:"Manantial"},{k:"Días",v:"18"},{k:"Humedad",v:"10.8%"}]},
+      {emoji:"✈️",name:"Exportación",date:"Feb 2025",status:"pending",text:"Destino: tostadores boutique de Escandinavia y Corea del Sur.",metrics:[{k:"Destino",v:"SC/KR"},{k:"Tipo",v:"Micro-lote"},{k:"Kg",v:"3,360"}]},
+    ]
+  },
+  {
+    id:"catimor-colasay", name:"Catimor Colasay Premium", producer:"Humberto Vásquez Sánchez",
+    location:"Colasay, Jaén", variedad:"Catimor", altitud:"1,650 msnm",
+    financiado:20, etapa:"Siembra", precio:"S/ 260/kg", proceso:"Natural",
+    loteKg:500, bgClass:"bg-mountain", emoji:"🌄",
+    historia:"Humberto Vásquez ha desarrollado una variante mejorada de Catimor resistente a la roya que produce tazas de perfil único. Su metodología de fermentación controlada ha ganado reconocimiento en competencias nacionales.",
+    clima:"Semi-húmedo, 24-30°C", sabor:["Ciruela","Tabaco dulce","Cacao","Almendra"],
+    certs:["SCA Score 85+","Resistente a Roya"],
+    timeline:[
+      {emoji:"🌱",name:"Siembra & Vivero",date:"Ago 2024",status:"progress",text:"Preparación y siembra de semillas mejoradas resistentes a la roya.",metrics:[{k:"Semillas",v:"3,200"},{k:"Germinación",v:"89%"},{k:"Variante",v:"Mejorada"}]},
+      {emoji:"🌸",name:"Floración",date:"Feb 2025",status:"pending",text:"Primera floración proyectada para febrero 2025.",metrics:[{k:"Proyección",v:"Feb 2025"},{k:"Estado",v:"Pendiente"},{k:"Plantas",v:"2,800"}]},
+      {emoji:"🍒",name:"Cosecha",date:"Jun 2025",status:"pending",text:"Primera cosecha estimada a mitad del 2025.",metrics:[{k:"Estimado",v:"Jun 2025"},{k:"Proyección",v:"8 ton"},{k:"Estado",v:"Planificado"}]},
+      {emoji:"☀️",name:"Secado",date:"Jul 2025",status:"pending",text:"Proceso natural con fermentación controlada en biofermentadores.",metrics:[{k:"Método",v:"Bioferment."},{k:"Innovación",v:"Alta"},{k:"Días",v:"40"}]},
+      {emoji:"✈️",name:"Exportación",date:"Ago 2025",status:"pending",text:"Destino: mercados emergentes en Asia y Middle East.",metrics:[{k:"Destino",v:"Asia/ME"},{k:"Lote",v:"Macro"},{k:"Kg",v:"12,000"}]},
+    ]
+  }
+];
+
+const MIS_RESERVAS = [
+  {parcelaId:"geisha-juan-perez", kilos:25, inversion:12000, fecha:"12 Jul 2024", statusLabel:"En cultivo", statusClass:"status-activa"},
+  {parcelaId:"bourbon-jaen",      kilos:15, inversion:6150,  fecha:"05 Ago 2024", statusLabel:"En secado",  statusClass:"status-proceso"},
+  {parcelaId:"typica-huabal",     kilos:10, inversion:3500,  fecha:"20 Ago 2024", statusLabel:"Floración",  statusClass:"status-pendiente"},
+];
+
+const HISTORIAL = [
+  {icon:"✅", dotClass:"h-dot-green",  title:"Reserva confirmada — Geisha Finca El Edén",       sub:"25 kg reservados · S/ 12,000 pagados",             date:"12 Jul 2024", badge:"Completado", bs:{background:"rgba(74,222,128,.12)",color:"#16a34a"}},
+  {icon:"🌸", dotClass:"h-dot-gold",   title:"Floración iniciada — Geisha Finca El Edén",        sub:"Notificación de etapa: 91% de densidad floral",    date:"15 Jul 2024", badge:"Actualización", bs:{background:"rgba(201,169,110,.12)",color:"#a0622a"}},
+  {icon:"💰", dotClass:"h-dot-blue",   title:"Reserva confirmada — Bourbon Rojo Alto Huallaga",  sub:"15 kg reservados · S/ 6,150 pagados",              date:"05 Ago 2024", badge:"Completado", bs:{background:"rgba(74,222,128,.12)",color:"#16a34a"}},
+  {icon:"☀️", dotClass:"h-dot-gold",   title:"Secado iniciado — Bourbon Rojo Alto Huallaga",     sub:"Proceso honey activo · Mucílago 80% preservado",   date:"10 Sep 2024", badge:"En proceso",  bs:{background:"rgba(201,169,110,.12)",color:"#a0622a"}},
+  {icon:"📦", dotClass:"h-dot-purple", title:"Reserva confirmada — Typica Antiguo Huabal",       sub:"10 kg reservados · S/ 3,500 pagados",              date:"20 Ago 2024", badge:"Completado", bs:{background:"rgba(74,222,128,.12)",color:"#16a34a"}},
+  {icon:"✈️", dotClass:"h-dot-blue",   title:"Exportación confirmada — Bourbon (Japón)",         sub:"Contenedor refrigerado preparado · ETA: Dic 2024", date:"02 Oct 2024", badge:"En tránsito",bs:{background:"rgba(99,102,241,.12)",color:"#6366f1"}},
+];
+
+const BAR_DATA = [
+  {mes:"Ene",val:0},{mes:"Feb",val:0},{mes:"Mar",val:0},{mes:"Abr",val:0},{mes:"May",val:0},{mes:"Jun",val:0},
+  {mes:"Jul",val:12000},{mes:"Ago",val:9650},{mes:"Sep",val:0},{mes:"Oct",val:0},{mes:"Nov",val:0},{mes:"Dic",val:0},
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let currentPage = 'home';
+let activeFilter = 'Todos';
+let currentSearch = '';
+let currentDetalle = null;
+let isEditing = false;
+let editNombre = 'Alejandro Vega Ruiz';
+let editCorreo = 'a.vega@correo.com';
+
+// ============================================================
+// PAGE ROUTER
+// ============================================================
+function showPage(name, parcelaId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-'+name);
+  if (!el) return;
+  el.classList.add('active');
+  currentPage = name;
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  if (name === 'parcelas') renderParcelas();
+  if (name === 'detalle' && parcelaId) renderDetalle(parcelaId);
+  if (name === 'perfil') renderPerfil();
+
+  // re-init counters on home if switching back
+  if (name === 'home') setTimeout(initCounters, 100);
+}
+
+function scrollToSection(id) {
+  if (currentPage !== 'home') {
+    showPage('home');
+    setTimeout(() => { const el=document.getElementById(id); if(el)el.scrollIntoView({behavior:'smooth'}); }, 300);
+  } else {
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  }
+}
+
+// ============================================================
+// FOOTER INJECTION
+// ============================================================
+function injectFooters() {
+  const tpl = document.getElementById('footer-tpl').innerHTML;
+  ['home','parcelas','detalle','productor'].forEach(id => {
+    const el = document.getElementById('footer-'+id);
+    if (el) el.innerHTML = tpl;
+  });
+}
+
+// ============================================================
+// PARTICLES
+// ============================================================
+function initParticles() {
+  const c = document.getElementById('particles');
+  if (!c) return;
+  for (let i=0;i<15;i++) {
+    const d = document.createElement('div');
+    d.className = 'particle';
+    const size = Math.random()*6+2;
+    d.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-delay:${Math.random()*10}s;animation-duration:${Math.random()*15+10}s`;
+    c.appendChild(d);
+  }
+}
+
+// ============================================================
+// COUNTERS
+// ============================================================
+function initCounters() {
+  const els = document.querySelectorAll('.counter');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting || entry.target.dataset.done) return;
+      entry.target.dataset.done = '1';
+      const target = +entry.target.dataset.target;
+      const suffix = entry.target.dataset.suffix || '';
+      let current = 0;
+      const step = target/60;
+      const timer = setInterval(() => {
+        current = Math.min(current+step, target);
+        entry.target.textContent = Math.floor(current) + suffix;
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    });
+  });
+  els.forEach(el => observer.observe(el));
+}
+
+// ============================================================
+// TIMELINE OBSERVER
+// ============================================================
+function initTimelineObserver() {
+  const items = document.querySelectorAll('.timeline-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.2});
+  items.forEach(el => observer.observe(el));
+}
+
+// ============================================================
+// NAVBAR SCROLL
+// ============================================================
+function initNavbar() {
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+}
+
+// ============================================================
+// PARCELAS MARKETPLACE
+// ============================================================
+function filterParcelas() {
+  currentSearch = document.getElementById('search-input')?.value.toLowerCase() || '';
+  renderParcelas();
+}
+
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderParcelas();
+}
+
+function renderParcelas() {
+  const grid = document.getElementById('parcelas-grid');
+  const countEl = document.getElementById('filter-count');
+  if (!grid) return;
+
+  const filtered = PARCELAS.filter(p => {
+    const s = currentSearch;
+    const matchSearch = !s || p.name.toLowerCase().includes(s) || p.producer.toLowerCase().includes(s) ||
+      p.variedad.toLowerCase().includes(s) || p.location.toLowerCase().includes(s);
+    const matchFilter = activeFilter==='Todos' || p.variedad.includes(activeFilter) || p.proceso===activeFilter;
+    return matchSearch && matchFilter;
+  });
+
+  if (countEl) countEl.textContent = `${filtered.length} resultado${filtered.length!==1?'s':''}`;
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="no-results" style="grid-column:1/-1"><div class="no-results-icon">🔍</div><p>No se encontraron parcelas con ese criterio.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="parcela-card" onclick="showPage('detalle'); renderDetalle('${p.id}')">
+      <div class="parcela-img ${p.bgClass}">
+        <span>${p.emoji}</span>
+        <div class="parcela-badge">${p.variedad}</div>
+        <div class="parcela-progress-pill">📍 ${p.etapa}</div>
+      </div>
+      <div class="parcela-body">
+        <div class="parcela-producer">${p.producer}</div>
+        <div class="parcela-name">${p.name}</div>
+        <div class="parcela-meta">
+          <span class="meta-tag">📍 ${p.location}</span>
+          <span class="meta-tag">⛰ ${p.altitud}</span>
+          <span class="meta-tag">⚗️ ${p.proceso}</span>
+        </div>
+        <div class="progress-section">
+          <div class="progress-header"><span class="progress-label">Financiado</span><span class="progress-pct">${p.financiado}%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${p.financiado}%"></div></div>
+        </div>
+        <div class="parcela-footer">
+          <div class="parcela-price">Desde <strong>${p.precio}</strong></div>
+          <button class="btn-trazabilidad" onclick="event.stopPropagation();showDetallePage('${p.id}')">🔍 Ver trazabilidad →</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function showDetallePage(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-detalle').classList.add('active');
+  currentPage='detalle';
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderDetalle(id);
+}
+
+// ============================================================
+// DETALLE PAGE
+// ============================================================
+function renderDetalle(id) {
+  currentDetalle = id;
+  const p = PARCELAS.find(x=>x.id===id);
+  if (!p) return;
+  const el = document.getElementById('detalle-content');
+
+  const timelineHTML = p.timeline.map(t => `
+    <div class="traz-item">
+      <div class="traz-dot ${t.status}">${t.emoji}</div>
+      <div class="traz-content">
+        <div class="traz-step-header">
+          <span class="traz-step-name">${t.name}</span>
+          <span class="traz-step-date">${t.date}</span>
+        </div>
+        <p class="traz-step-text">${t.text}</p>
+        <span class="traz-step-badge badge-${t.status}">
+          ${t.status==='done'?'✓ Completado':t.status==='progress'?'⚡ En proceso':'○ Pendiente'}
+        </span>
+        <div class="traz-metrics">
+          ${t.metrics.map(m=>`<div class="traz-metric"><div class="traz-metric-val">${m.v}</div><div class="traz-metric-key">${m.k}</div></div>`).join('')}
+        </div>
+      </div>
+    </div>`).join('');
+
+  const precioNum = parseInt(p.precio.replace(/[^\d]/g,''));
+
+  el.innerHTML = `
+    <div class="detalle-hero">
+      <div class="detalle-hero-bg ${p.bgClass}">${p.emoji}</div>
+      <div class="detalle-hero-overlay"></div>
+      <div class="detalle-hero-content">
+        <button class="btn-back" onclick="showPage('parcelas')">← Volver a parcelas</button>
+        <div class="detalle-tag">${p.variedad} · ${p.proceso}</div>
+        <h1 class="detalle-title">${p.name}</h1>
+        <div class="detalle-meta-row">
+          <div class="detalle-meta-item">👤 ${p.producer}</div>
+          <div class="detalle-meta-item">📍 ${p.location}</div>
+          <div class="detalle-meta-item">⛰ ${p.altitud}</div>
+          <div class="detalle-meta-item">🌡 ${p.clima}</div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center">
+          <div style="background:rgba(201,169,110,.2);border:1px solid rgba(201,169,110,.4);border-radius:8px;padding:8px 16px;color:var(--gold)">
+            <strong style="font-family:var(--fd);font-size:1.5rem">${p.financiado}%</strong> <span style="font-size:.8rem">financiado</span>
+          </div>
+          <div style="background:rgba(61,107,61,.2);border:1px solid rgba(61,107,61,.4);border-radius:8px;padding:8px 16px;color:#7dba7d">
+            📍 Etapa: <strong>${p.etapa}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detalle-body">
+      <div class="detalle-main">
+        <div class="traz-section">
+          <div class="traz-title">🔗 Trazabilidad del Lote</div>
+          <div class="traz-timeline">${timelineHTML}</div>
+        </div>
+
+        <div style="margin-bottom:2rem">
+          <div class="traz-title">📋 Información de la Finca</div>
+          <p style="color:var(--tm);line-height:1.8;margin-bottom:1.5rem">${p.historia}</p>
+          <div class="info-grid">
+            <div class="info-item"><div class="info-item-label">Variedad</div><div class="info-item-val">${p.variedad}</div></div>
+            <div class="info-item"><div class="info-item-label">Proceso</div><div class="info-item-val">${p.proceso}</div></div>
+            <div class="info-item"><div class="info-item-label">Altitud</div><div class="info-item-val">${p.altitud}</div></div>
+            <div class="info-item"><div class="info-item-label">Clima</div><div class="info-item-val">${p.clima}</div></div>
+            <div class="info-item"><div class="info-item-label">Lote disponible</div><div class="info-item-val">${p.loteKg} kg</div></div>
+            <div class="info-item"><div class="info-item-label">Precio por kg</div><div class="info-item-val">${p.precio}</div></div>
+          </div>
+          <div style="margin-bottom:1.5rem">
+            <div style="font-size:.85rem;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Notas de sabor</div>
+            <div class="flavor-tags">${p.sabor.map(s=>`<span class="flavor-tag">${s}</span>`).join('')}</div>
+          </div>
+          <div>
+            <div style="font-size:.85rem;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Certificaciones</div>
+            <div class="cert-tags">${p.certs.map(c=>`<span class="cert-tag">✓ ${c}</span>`).join('')}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detalle-sidebar">
+        <div class="sidebar-card" id="reserva-card-${p.id}">
+          <div class="sidebar-card-title">💼 Reservar Micro-Lote</div>
+          <div class="financing-bar">
+            <div class="financing-label">
+              <span style="font-size:.85rem;color:var(--tl)">Financiamiento alcanzado</span>
+              <span class="financing-pct">${p.financiado}%</span>
+            </div>
+            <div class="progress-bar" style="height:10px"><div class="progress-fill" style="width:${p.financiado}%"></div></div>
+            <div style="font-size:.78rem;color:var(--tl);margin-top:6px">${Math.round(p.loteKg*p.financiado/100)} / ${p.loteKg} kg reservados</div>
+          </div>
+          <div style="margin:1.5rem 0 .5rem">
+            <label style="font-size:.85rem;font-weight:600;color:var(--tm);display:block;margin-bottom:8px">
+              Cantidad de kg: <strong style="color:var(--gd)" id="kg-display-${p.id}">10 kg</strong>
+            </label>
+            <input type="range" class="investment-slider" min="5" max="${Math.min(p.loteKg,200)}" value="10"
+              oninput="updateInvestment('${p.id}',${precioNum},this.value)"/>
+            <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--tl)"><span>5 kg</span><span>${Math.min(p.loteKg,200)} kg</span></div>
+          </div>
+          <div class="investment-summary" id="inv-summary-${p.id}">
+            <div class="inv-row"><span class="inv-label">Precio por kg</span><span class="inv-val">${p.precio}</span></div>
+            <div class="inv-row"><span class="inv-label">Cantidad</span><span class="inv-val" id="inv-kg-${p.id}">10 kg</span></div>
+            <div class="inv-row" style="border-top:1px solid var(--beige-d);padding-top:8px;margin-top:4px">
+              <span class="inv-label" style="font-weight:600">Total estimado</span>
+              <span class="inv-val gold" style="font-size:1rem" id="inv-total-${p.id}">S/ ${(10*precioNum).toLocaleString()}</span>
+            </div>
+          </div>
+          <div style="background:rgba(61,107,61,.08);border:1px solid rgba(61,107,61,.2);border-radius:8px;padding:10px 12px;font-size:.8rem;color:var(--gd);margin-bottom:.5rem">
+            ✓ Pago al confirmar envío · Sin comisiones ocultas
+          </div>
+          <button class="btn-reservar" id="btn-reservar-${p.id}" onclick="doReserva('${p.id}',${precioNum})">
+            Reservar 10 kg — S/ ${(10*precioNum).toLocaleString()}
+          </button>
+        </div>
+
+      </div>
+    </div>`;
+}
+
+function updateInvestment(id, precio, kg) {
+  kg = parseInt(kg);
+  const total = kg * precio;
+  const d = document.getElementById('kg-display-'+id);
+  const k = document.getElementById('inv-kg-'+id);
+  const t = document.getElementById('inv-total-'+id);
+  const b = document.getElementById('btn-reservar-'+id);
+  if(d) d.textContent = kg+' kg';
+  if(k) k.textContent = kg+' kg';
+  if(t) t.textContent = 'S/ '+total.toLocaleString();
+  if(b) b.textContent = `Reservar ${kg} kg — S/ ${total.toLocaleString()}`;
+}
+
+function doReserva(id, precio) {
+  const slider = document.querySelector(`#reserva-card-${id} input[type=range]`);
+  const kg = slider ? parseInt(slider.value) : 10;
+  const total = kg * precio;
+  const p = PARCELAS.find(x=>x.id===id);
+  if (!p) return;
+
+  // Populate modal
+  document.getElementById('reserva-modal-kg').textContent = kg + ' kg';
+  document.getElementById('reserva-modal-total').textContent = 'S/ ' + total.toLocaleString();
+  document.getElementById('reserva-modal-precio-kg').textContent = p.precio;
+  document.getElementById('reserva-modal-productor').textContent = p.producer;
+  document.getElementById('reserva-modal-finca').textContent = p.name;
+  document.getElementById('reserva-modal-ubicacion').textContent = p.location;
+  document.getElementById('reserva-modal-variedad').textContent = p.variedad;
+  document.getElementById('reserva-modal-altitud').textContent = p.altitud;
+  document.getElementById('reserva-modal-proceso').textContent = p.proceso;
+
+  // Store current id for confirm action
+  document.getElementById('btn-confirmar-reserva').setAttribute('data-id', id);
+
+  // Show modal
+  document.getElementById('reserva-modal-overlay').classList.add('open');
+}
+
+function cerrarReservaModal() {
+  document.getElementById('reserva-modal-overlay').classList.remove('open');
+}
+
+function confirmarReserva() {
+  const btn = document.getElementById('btn-confirmar-reserva');
+  const id = btn.getAttribute('data-id');
+  cerrarReservaModal();
+  const card = document.getElementById('reserva-card-'+id);
+  if (card) card.innerHTML = `
+    <div class="success-box">
+      <div class="success-icon">📨</div>
+      <div class="success-title" style="color:var(--gd)">¡Solicitud enviada!</div>
+      <p class="success-text" style="line-height:1.7">El propietario de la finca se pondrá en contacto contigo a la brevedad para coordinar los detalles de tu reserva.</p>
+    </div>`;
+}
+
+// ============================================================
+// PERFIL
+// ============================================================
+function showPerfilTab(tab, btn) {
+  document.querySelectorAll('.perfil-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.perfil-nav-item').forEach(i=>i.classList.remove('active'));
+  const el = document.getElementById('tab-'+tab);
+  if(el) el.classList.add('active');
+  if(btn) btn.classList.add('active');
+  else {
+    // find nav item by text content
+    document.querySelectorAll('.perfil-nav-item').forEach(i=>{
+      if(i.textContent.trim().toLowerCase().includes(tab.toLowerCase()))
+        i.classList.add('active');
+    });
+  }
+}
+
+function renderPerfil() {
+  renderBarChart();
+  renderHistorialResumen();
+  renderHistorialFull();
+  renderMisParcelas();
+}
+
+function renderBarChart() {
+  const container = document.getElementById('bar-chart-resumen');
+  if(!container) return;
+  const max = Math.max(...BAR_DATA.map(b=>b.val), 1);
+  container.innerHTML = BAR_DATA.map(b=>`
+    <div class="bar-col">
+      <div class="bar" data-val="${b.val?'S/'+(b.val/1000).toFixed(0)+'k':'—'}"
+        style="height:${Math.max((b.val/max)*100,2)}%;background:${b.val?'linear-gradient(to top,var(--gd),var(--gl))':'var(--beige-d)'};opacity:${b.val?1:0.4}"></div>
+      <div class="bar-label">${b.mes}</div>
+    </div>`).join('');
+}
+
+function renderHistorialResumen() {
+  const el = document.getElementById('historial-resumen');
+  if(!el) return;
+  el.innerHTML = HISTORIAL.slice(0,4).map(h=>`
+    <div class="historial-item">
+      <div class="historial-dot ${h.dotClass}">${h.icon}</div>
+      <div class="historial-content"><div class="historial-title">${h.title}</div><div class="historial-sub">${h.sub}</div></div>
+      <div class="historial-right">
+        <div class="historial-date">${h.date}</div>
+        <span class="historial-badge" style="background:${h.bs.background};color:${h.bs.color}">${h.badge}</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderHistorialFull() {
+  const el = document.getElementById('historial-full');
+  if(!el) return;
+  el.innerHTML = HISTORIAL.map(h=>`
+    <div class="historial-item">
+      <div class="historial-dot ${h.dotClass}">${h.icon}</div>
+      <div class="historial-content"><div class="historial-title">${h.title}</div><div class="historial-sub">${h.sub}</div></div>
+      <div class="historial-right">
+        <div class="historial-date">${h.date}</div>
+        <span class="historial-badge" style="background:${h.bs.background};color:${h.bs.color}">${h.badge}</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderMisParcelas() {
+  const el = document.getElementById('mis-parcelas-grid');
+  if(!el) return;
+  el.innerHTML = MIS_RESERVAS.map(r=>{
+    const p = PARCELAS.find(x=>x.id===r.parcelaId);
+    if(!p) return '';
+    return `
+      <div class="mi-parcela-card">
+        <div class="mi-parcela-img ${p.bgClass}">
+          ${p.emoji}
+          <div class="mi-parcela-status ${r.statusClass}">${r.statusLabel}</div>
+        </div>
+        <div class="mi-parcela-body">
+          <div class="mi-parcela-name">${p.name}</div>
+          <div class="mi-parcela-producer">👤 ${p.producer} · 📍 ${p.location}</div>
+          <div class="mi-parcela-stats">
+            <div class="mi-stat"><div class="mi-stat-val">${r.kilos} kg</div><div class="mi-stat-key">Reservado</div></div>
+            <div class="mi-stat"><div class="mi-stat-val">S/ ${r.inversion.toLocaleString()}</div><div class="mi-stat-key">Inversión</div></div>
+            <div class="mi-stat"><div class="mi-stat-val">${p.variedad}</div><div class="mi-stat-key">Variedad</div></div>
+            <div class="mi-stat"><div class="mi-stat-val">${p.altitud}</div><div class="mi-stat-key">Altitud</div></div>
+          </div>
+          <div class="progress-section">
+            <div class="progress-header"><span class="progress-label">Financiamiento del lote</span><span class="progress-pct">${p.financiado}%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${p.financiado}%"></div></div>
+          </div>
+          <div class="mi-parcela-actions">
+            <button class="btn-mini btn-mini-primary" onclick="showDetallePage('${p.id}')">🔍 Trazabilidad</button>
+            <button class="btn-mini btn-mini-outline" onclick="showDetallePage('${p.id}')">ℹ️ Más info</button>
+            <button class="btn-mini btn-mini-outline">💬 Productor</button>
+          </div>
+          <div style="margin-top:.75rem;font-size:.73rem;color:var(--tl);text-align:right">Reservado el ${r.fecha}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ============================================================
+// EDIT PROFILE
+// ============================================================
+function toggleEdit() {
+  isEditing = !isEditing;
+  const nombreEl = document.getElementById('field-nombre');
+  const correoEl = document.getElementById('field-correo');
+  const saveBtn = document.getElementById('btn-edit-save');
+  const cancelBtn = document.getElementById('btn-cancel-edit');
+  if(isEditing) {
+    nombreEl.innerHTML = `<input value="${editNombre}" oninput="editNombre=this.value;updateSidebarName()"/>`;
+    correoEl.innerHTML = `<input value="${editCorreo}" oninput="editCorreo=this.value"/>`;
+    saveBtn.innerHTML = '💾 Guardar cambios';
+    cancelBtn.style.display='flex';
+  } else {
+    document.getElementById('cuenta-nombre-display').textContent = editNombre;
+    document.getElementById('cuenta-correo-display').textContent = editCorreo;
+    nombreEl.innerHTML = `<div class="info-field-val">${editNombre}</div>`;
+    correoEl.innerHTML = `<div class="info-field-val">${editCorreo}</div>`;
+    saveBtn.innerHTML = '✏️ Editar perfil';
+    cancelBtn.style.display='none';
+    document.getElementById('sidebar-name').textContent = editNombre;
+  }
+}
+
+function cancelEdit() {
+  isEditing = false;
+  const saveBtn = document.getElementById('btn-edit-save');
+  const cancelBtn = document.getElementById('btn-cancel-edit');
+  document.getElementById('field-nombre').innerHTML = `<div class="info-field-val">${editNombre}</div>`;
+  document.getElementById('field-correo').innerHTML = `<div class="info-field-val">${editCorreo}</div>`;
+  saveBtn.innerHTML = '✏️ Editar perfil';
+  cancelBtn.style.display='none';
+  isEditing=false;
+}
+
+function updateSidebarName() {
+  document.getElementById('sidebar-name').textContent = editNombre;
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.getElementById('modal-form-content').style.display='block';
+  document.getElementById('modal-success').style.display='none';
+}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+function closeModalOutside(e) { if(e.target===e.currentTarget) closeModal(); }
+function submitModal() {
+  const nombre = document.getElementById('m-nombre').value;
+  if(!nombre) return;
+  document.getElementById('modal-form-content').style.display='none';
+  document.getElementById('modal-success').style.display='block';
+  document.getElementById('modal-success-name').textContent = `¡Bienvenido${nombre?' '+nombre.split(' ')[0]:''}!`;
+}
+
+// ============================================================
+// REGISTRO PRODUCTOR (nueva página)
+// ============================================================
+function submitProdRegistro() {
+  const nombre = document.getElementById('prod-nombre').value;
+  const email = document.getElementById('prod-email').value;
+  if(!nombre||!email) return;
+  document.getElementById('registro-prod-form').style.display='none';
+  document.getElementById('registro-prod-success').style.display='block';
+}
+
+// ============================================================
+// REGISTRO
+// ============================================================
+function submitRegistro() {
+  const nombre = document.getElementById('reg-nombre').value;
+  const email = document.getElementById('reg-email').value;
+  if(!nombre||!email) return;
+  document.getElementById('registro-form').style.display='none';
+  document.getElementById('registro-success').style.display='block';
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  injectFooters();
+  initParticles();
+  initNavbar();
+  setTimeout(()=>{
+    initCounters();
+    initTimelineObserver();
+  }, 200);
+});
+</script>
+</body>
+</html>
